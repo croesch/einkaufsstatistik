@@ -3,7 +3,7 @@
 
 	<!-- definition of variables -->
 	<!-- version of program - to be changed manually -->
-	<property name="version" value="0.9.2 PRE-ALPHA" />
+	<property name="version" value="0.9.3 PRE-ALPHA" />
 
 	<!-- date - to be changed manually -->
 	<property name="date" value="18. Dezember 2010" />
