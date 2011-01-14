@@ -31,7 +31,7 @@ import de.purchasemgr.util.CMenu;
 import de.purchasemgr.util.CMenuItem;
 
 /**
- * TODO Comment here
+ * The manager for everything that has to do with GUI TODO change this and remove this central class
  * 
  * @author $Author: croesch $
  * @version $Revision: 1.11 $ ($Date: 2010/12/19 12:56:24 $)
