@@ -20,7 +20,7 @@ import de.purchasemgr.i18n.Strings;
  * <http://www.gnu.org/licenses/>.
  * 
  * @author $Author: croesch $
- * @version $Revision: 1.6 $ ($Date: 2010/12/19 12:56:24 $)
+ * @version ($Date: 2010/12/19 12:56:24 $)
  */
 public class Main {
 

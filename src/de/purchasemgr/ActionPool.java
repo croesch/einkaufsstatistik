@@ -6,7 +6,7 @@ import de.purchasemgr.i18n.Messages;
  * The actions that are used in the program
  * 
  * @author $Author: croesch $
- * @version $Revision: 1.5 $ ($Date: 2010/12/19 12:56:24 $)
+ * @version ($Date: 2010/12/19 12:56:24 $)
  */
 public enum ActionPool {
 
