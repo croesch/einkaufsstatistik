@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="Einkaufsstatistik" default="make-jar" basedir="../">
+
+	<!-- definition of variables -->
+	<!-- version of program - to be changed manually -->
+	<property name="version" value="0.9.2 PRE-ALPHA" />
+
+	<!-- date - to be changed manually -->
+	<property name="date" value="18. Dezember 2010" />
+
+	<!-- token to replace version in source files -->
+	<property name="version.token" value="&quot;@@VERSION@@&quot;" />
+	<property name="version.value" value="&quot;${version}&quot; /*VERSION*/" />
+
+	<!-- token to replace date in source files -->
+	<property name="date.token" value="&quot;@@DATE@@&quot;" />
+	<property name="date.value" value="&quot;${date}&quot; /*DATE*/" />
+
+	<!-- source directory that contains .java files -->
+	<property name="source-dir" location="src" />
+
+	<!-- should the .jar-file be debuggable? -->
+	<property name="debug" value="off" />
+
+	<!-- no idea .. what is this good for? -->
+	<property name="debuglevel" value="lines,var,source" />
+
+	<!-- .java-files will be compiled into an directory -->
+	<!-- its not necessary to compile the source before use this -->
+	<property name="class-dir" location="ant-classes" />
+
+	<!-- destination dir for the build -->
+	<property name="dest.dir" location="builds/V${version}" />
+
+	<!-- name of the created jar file -->
+	<property name="dest.file.name" value="einkaufsstatistik.jar" />
+
+	<!-- full path to the destination file -->
+	<property name="dest.file" location="${dest.dir}/${dest.file.name}" />
+
+	<!-- I guess this is the Java version of the enduser!? -->
+	<property name="java-level" value="1.6" />
+
+	<!-- Step 1: Compiles the classes.  -->
+	<target name="compile" description="Compile the source">
+		<replace dir="${source-dir}" token="${version.token}" value="${version.value}" />
+		<replace dir="${source-dir}" token="${date.token}" value="${date.value}" />
+
+		<!-- delete directory where to compile the classes if it exists -->
+		<delete includeEmptyDirs="true" quiet="true" dir="${class-dir}" />
+		<!-- then create it -->
+		<mkdir dir="${class-dir}" />
+
+		<!-- compiling -->
+		<javac srcdir="${source-dir}" destdir="${class-dir}" debug="${debug}" debuglevel="${debuglevel}" target="${java-level}" />
+
+		<replace dir="${source-dir}" token="${version.value}" value="${version.token}" />
+		<replace dir="${source-dir}" token="${date.value}" value="${date.token}" />
+	</target>
+
+	<!-- Step 2: jar -->
+	<target name="make-jar" depends="compile" description="Create ${dest.file.name}">
+		<!-- Delete destination directory if it exists -->
+		<delete includeEmptyDirs="true" quiet="true" dir="${dest.dir}" />
+		<!-- create it -->
+		<mkdir dir="${dest.dir}" />
+		<!-- definition of the jar file -->
+		<jar destfile="${dest.file}">
+			<!-- files, that should be in there -->
+			<fileset dir="${class-dir}" />
+			
+			<!-- add language files -->
+			<fileset dir="lang" />
+
+			<!-- make the manifest -->
+			<manifest>
+				<!-- class with public void main(String args[]) -->
+				<attribute name="Main-Class" value="de.purchasemgr.Main" />
+				<attribute name="Class-Path" value="." />
+			</manifest>
+		</jar>
+		<antcall target="copy.lang" />
+		<antcall target="copy.licence" />
+		<antcall target="make.bat" />
+		<!-- delete directory of compiled classes -->
+    	<delete includeEmptyDirs="true" quiet="true" dir="${class-dir}" />
+	</target>
+
+	<!-- Step 3: copy language directory -->
+	<target name="copy.lang" description="Copy lang directory">
+		<mkdir dir="${dest.dir}/lang" />
+		<copy todir="${dest.dir}/lang">
+		    <fileset dir="lang"/>
+		</copy>
+	</target>
+	
+	<!-- Step 4: copy licence directory -->
+	<target name="copy.licence" description="Copy licence directory">
+		<mkdir dir="${dest.dir}/licence" />
+		<copy todir="${dest.dir}/licence">
+		    <fileset dir="licence"/>
+		</copy>
+	</target>
+	
+	<!-- Step 5: create bat file -->
+	<target name="make.bat" description="Make bat starter">
+		<echo file="${dest.dir}/start.bat">java -jar ${dest.file.name}</echo>
+	</target>
+
+</project>
