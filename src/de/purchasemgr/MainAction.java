@@ -20,7 +20,7 @@ import de.purchasemgr.logging.LogManager;
 public class MainAction extends AbstractAction {
 
   /** generated version UID */
-  private static final long serialVersionUID = 2926281029596958445L;
+  private static final long serialVersionUID = 1L;
 
   Window parentWindow;
 
