@@ -26,9 +26,6 @@ import de.purchasemgr.i18n.KeyStrokes;
 import de.purchasemgr.i18n.Messages;
 import de.purchasemgr.i18n.Strings;
 import de.purchasemgr.logging.LogManager;
-import de.purchasemgr.util.CButton;
-import de.purchasemgr.util.CMenu;
-import de.purchasemgr.util.CMenuItem;
 
 /**
  * The manager for everything that has to do with GUI TODO change this and remove this central class
