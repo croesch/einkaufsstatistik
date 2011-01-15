@@ -2,6 +2,8 @@ package de.purchasemgr.i18n;
 
 import javax.swing.KeyStroke;
 
+import de.crhcomponents.util.FilePropertiesBundle;
+
 /**
  * This class provides access to the keystrokes properties file.
  * 
@@ -65,7 +67,8 @@ public enum KeyStrokes {
 
   private KeyStrokes() {
     final String key = "pmanager." + name().toLowerCase().replace('_', '.');
-    this.stroke = KeyStroke.getKeyStroke(KeyStrokesBundle.getStroke(key));
+    final String str = FilePropertiesBundle.getMessageFromSingleBundle("config/keystrokes", key);
+    this.stroke = KeyStroke.getKeyStroke(str == null ? "" : str);
   }
 
   @Override

@@ -1,5 +1,7 @@
 package de.purchasemgr.i18n;
 
+import de.crhcomponents.util.FilePropertiesBundle;
+
 /**
  * This class provides access to the messages properties file.
  * 
@@ -202,7 +204,7 @@ public enum Messages {
 
   private Messages() {
     final String key = "pmanager." + name().toLowerCase().replace('_', '.');
-    this.string = MessagesBundle.getMessage(key);
+    this.string = FilePropertiesBundle.getText("lang/messages", key);
   }
 
   private Messages(String s) {

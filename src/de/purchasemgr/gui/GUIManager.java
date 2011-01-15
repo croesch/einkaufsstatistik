@@ -17,6 +17,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
+import de.crhcomponents.components.CButton;
+import de.crhcomponents.components.CMenu;
+import de.crhcomponents.components.CMenuItem;
 import de.purchasemgr.ActionPool;
 import de.purchasemgr.Main;
 import de.purchasemgr.MainAction;

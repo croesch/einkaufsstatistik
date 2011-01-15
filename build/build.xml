@@ -15,6 +15,8 @@
 	<!-- token to replace date in source files -->
 	<property name="date.token" value="&quot;@@DATE@@&quot;" />
 	<property name="date.value" value="&quot;${date}&quot; /*DATE*/" />
+	
+	<property name="jars.dir" location="lib" />
 
 	<!-- source directory that contains .java files -->
 	<property name="source-dir" location="src" />
@@ -52,7 +54,12 @@
 		<mkdir dir="${class-dir}" />
 
 		<!-- compiling -->
-		<javac srcdir="${source-dir}" destdir="${class-dir}" debug="${debug}" debuglevel="${debuglevel}" target="${java-level}" />
+		<javac srcdir="${source-dir}" destdir="${class-dir}" debug="${debug}" debuglevel="${debuglevel}" target="${java-level}">
+			<classpath>
+				<pathelement location="${jars.dir}/crhcomponents-1.0-b0.jar" />
+			</classpath>
+		</javac>
+
 
 		<replace dir="${source-dir}" token="${version.value}" value="${version.token}" />
 		<replace dir="${source-dir}" token="${date.value}" value="${date.token}" />
@@ -69,17 +76,20 @@
 			<!-- files, that should be in there -->
 			<fileset dir="${class-dir}" />
 			
-			<!-- add language files -->
-			<fileset dir="lang" />
+			<zipfileset includes="**/*.class" src="${jars.dir}/crhcomponents-1.0-b0.jar" />
 
 			<!-- make the manifest -->
 			<manifest>
 				<!-- class with public void main(String args[]) -->
 				<attribute name="Main-Class" value="de.purchasemgr.Main" />
 				<attribute name="Class-Path" value="." />
+				<attribute name="Built-Date" value="${date}" />
+				<attribute name="Built-By" value="${user.name}" />
+				<attribute name="Implementation-Version" value="${version}" />
 			</manifest>
 		</jar>
 		<antcall target="copy.lang" />
+		<antcall target="copy.config" />
 		<antcall target="copy.licence" />
 		<antcall target="make.bat" />
 		<!-- delete directory of compiled classes -->
@@ -93,8 +103,16 @@
 		    <fileset dir="lang"/>
 		</copy>
 	</target>
+
+	<!-- Step 4: copy configuration directory -->
+	<target name="copy.config" description="Copy configuration directory">
+		<mkdir dir="${dest.dir}/config" />
+		<copy todir="${dest.dir}/config">
+		    <fileset dir="config"/>
+		</copy>
+	</target>
 	
-	<!-- Step 4: copy licence directory -->
+	<!-- Step 5: copy licence directory -->
 	<target name="copy.licence" description="Copy licence directory">
 		<mkdir dir="${dest.dir}/licence" />
 		<copy todir="${dest.dir}/licence">
@@ -102,7 +120,7 @@
 		</copy>
 	</target>
 	
-	<!-- Step 5: create bat file -->
+	<!-- Step 6: create bat file -->
 	<target name="make.bat" description="Make bat starter">
 		<echo file="${dest.dir}/start.bat">java -jar ${dest.file.name}</echo>
 	</target>
