@@ -10,13 +10,10 @@ import de.purchasemgr.i18n.Strings;
 /**
  * Utility class for Mnemonic operations
  * 
- * @author $Author: croesch $
- * @version $Revision: 1.1 $ ($Date: 2010/12/19 12:56:24 $)
+ * @author croesch
+ * @since Date: 2010/12/19 12:56:24
  */
 public class MnemonicUtil {
-
-  /** Version number. */
-  public static final String VER = "$Revision: 1.1 $"; //$NON-NLS-1$
 
   /**
    * Filters the mnemonic definition from the given string. If a mnemonic definition ([m]) is found, it will be set to

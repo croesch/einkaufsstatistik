@@ -3,81 +3,73 @@ package de.purchasemgr;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
-import javax.swing.AbstractButton;
-import javax.swing.Action;
 
 import de.purchasemgr.gui.GUIManager;
-import de.purchasemgr.gui.Window;
 import de.purchasemgr.i18n.Messages;
 import de.purchasemgr.logging.LogManager;
 
 /**
- * TODO Comment here!!!
+ * Class to provide the actions used in this program
  * 
- * @author $Author: croesch $
- * @version $Revision: 1.5 $ ($Date: 2010/12/19 10:41:42 $)
+ * @author croesch
+ * @since Date: 2010/12/19 10:41:42
  */
 public class MainAction extends AbstractAction {
 
   /** generated version UID */
   private static final long serialVersionUID = 1L;
 
-  Window parentWindow;
-
   private static GUIManager gui;
+
+  private final int id;
+
+  MainAction(ActionPool id) {
+    super(id.text());
+    this.id = id.ordinal();
+  }
 
   private void exit() {
     System.exit(0);
   }
 
   public void actionPerformed(ActionEvent e) {
-    Action act = ((AbstractButton)e.getSource()).getAction();
-    if (act.equals(ActionPool.EXIT.getAction())) {
+    if (this.id == ActionPool.EXIT.ordinal()) {
       exit();
-    } else if (act.equals(ActionPool.EDIT_SHOPS_NXT.getAction())) {
+    } else if (this.id == ActionPool.EDIT_SHOPS_NXT.ordinal()) {
       gui.editShopsRefresh(++gui.nr);
-    } else if (act.equals(ActionPool.EDIT_SHOPS_PRE.getAction())) {
+    } else if (this.id == ActionPool.EDIT_SHOPS_PRE.ordinal()) {
       gui.editShopsRefresh(--gui.nr);
-    } else if (act.equals(ActionPool.EDIT_SHOPS_NXT.getAction())) {
+    } else if (this.id == ActionPool.EDIT_SHOPS_NXT.ordinal()) {
       gui.getModel().editShops(gui.nr);
-    } else if (act.equals(ActionPool.EDIT_SHOPS_CAN.getAction())) {
+    } else if (this.id == ActionPool.EDIT_SHOPS_CAN.ordinal()) {
       gui.editShop.setVisible(false);
-    } else if (act.equals(ActionPool.NEW_PURCHASE_CAN.getAction())) {
+    } else if (this.id == ActionPool.NEW_PURCHASE_CAN.ordinal()) {
       gui.newPurchase.setVisible(false);
-    } else if (act.equals(ActionPool.ABOUT.getAction())) {
+    } else if (this.id == ActionPool.ABOUT.ordinal()) {
       GUIManager.about();
-    } else if (act.equals(ActionPool.NEW_PURCHASE.getAction())) {
+    } else if (this.id == ActionPool.NEW_PURCHASE.ordinal()) {
       if (gui.getModel().getShops().toArray().length == 0 || gui.getModel().getShops() == null) {
         LogManager.log(Messages.LOG_NOSHOPFORPURCHASE.text(), true);
       } else {
         gui.newPurchase();
       }
-    } else if (act.equals(ActionPool.NEW_SHOP_CANCEL.getAction())) {
+    } else if (this.id == ActionPool.NEW_SHOP_CANCEL.ordinal()) {
       gui.newShop.setVisible(false);
-    } else if (act.equals(ActionPool.NEW_SHOP_OK.getAction())) {
+    } else if (this.id == ActionPool.NEW_SHOP_OK.ordinal()) {
       gui.getModel().addShop();
-    } else if (act.equals(ActionPool.EDIT_SHOPS.getAction())) {
+    } else if (this.id == ActionPool.EDIT_SHOPS.ordinal()) {
       gui.editShops(0);
-    } else if (act.equals(ActionPool.NEW_SHOP.getAction())) {
+    } else if (this.id == ActionPool.NEW_SHOP.ordinal()) {
       gui.editShops(1);
-    } else if (act.equals(ActionPool.NEW_PURCHASE_SAVE.getAction())) {
+    } else if (this.id == ActionPool.NEW_PURCHASE_SAVE.ordinal()) {
       gui.getModel().addPurchase();
-    } else if (act.equals(ActionPool.EDIT_PURCHASE.getAction())) {
+    } else if (this.id == ActionPool.EDIT_PURCHASE.ordinal()) {
       gui.editPurchase();
-    } else if (act.equals(ActionPool.DEL_PURCHASE.getAction())) {
+    } else if (this.id == ActionPool.DEL_PURCHASE.ordinal()) {
       gui.removeSelectedPurchase();
     } else {
       LogManager.log(Messages.LOG_ACTION_ERROR.text(e.getActionCommand()));
     }
-  }
-
-  MainAction(String s, Window f) {
-    this(s);
-    this.parentWindow = f;
-  }
-
-  MainAction(String s) {
-    super(s);
   }
 
   /**

@@ -7,16 +7,13 @@ import javax.swing.JButton;
 /**
  * This button is able to set its mnemonic key automatically.
  * 
- * @author $Author: croesch $
- * @version $Revision: 1.1 $ ($Date: 2010/12/19 12:56:24 $)
+ * @author croesch
+ * @since Date: 2010/12/19 12:56:24
  */
 public class CButton extends JButton {
 
   /** generated version UID */
   private static final long serialVersionUID = 2951525102559877588L;
-
-  /** Version number. */
-  public static final String VER = "$Revision: 1.1 $"; //$NON-NLS-1$
 
   /**
    * Simply calls {@link JButton#JButton()}

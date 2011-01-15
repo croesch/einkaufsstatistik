@@ -3,8 +3,8 @@ package de.purchasemgr.i18n;
 /**
  * This class provides access to the messages properties file.
  * 
- * @author $Author: croesch $
- * @version $Revision: 1.7 $ ($Date: 2010/12/19 12:56:24 $)
+ * @author croesch
+ * @since Date: 2010/12/19 12:56:24
  */
 @SuppressWarnings("nls")
 public enum Messages {

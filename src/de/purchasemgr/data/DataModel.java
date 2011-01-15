@@ -10,13 +10,10 @@ import de.purchasemgr.gui.GUIManager;
 /**
  * TODO Comment here
  * 
- * @author $Author: croesch $
- * @version $Revision: 1.4 $ ($Date: 2010/12/19 10:41:41 $)
+ * @author croesch
+ * @since Date: 2010/12/19 10:41:41
  */
 public class DataModel {
-
-  /** Version number. */
-  public static final String VER = "$Revision: 1.4 $"; //$NON-NLS-1$
 
   private final List<Purchase> purchases = new ArrayList<Purchase>();
 
@@ -32,7 +29,7 @@ public class DataModel {
     String day = this.gui.dayField.getText();
     String month = this.gui.dayField.getText();
     String year = this.gui.dayField.getText();
-    cal.set(Integer.valueOf(year), Integer.valueOf(month) - 1, Integer.valueOf(day));
+    cal.set(Integer.valueOf(year).intValue(), Integer.valueOf(month).intValue() - 1, Integer.valueOf(day).intValue());
     this.purchases.add(new Purchase(cal.getTime(), (Shop)this.gui.shopField.getSelectedItem()));
 
     this.gui.list.setListData(getPurchases().toArray());

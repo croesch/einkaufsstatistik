@@ -19,13 +19,10 @@ import de.purchasemgr.i18n.Strings;
  * You should have received a copy of the GNU General Public License along with this program. If not, see
  * <http://www.gnu.org/licenses/>.
  * 
- * @author $Author: croesch $
- * @version ($Date: 2010/12/19 12:56:24 $)
+ * @author croesch
+ * @since Date: 2010/12/19 12:56:24
  */
 public class Main {
-
-  /** version number. */
-  public static final String VER = "$Revision: 1.6 $"; //$NON-NLS-1$
 
   /** The version String for the whole program */
   public static final String VERSION = Strings.PROGRAM_VERSION.text();
@@ -36,7 +33,7 @@ public class Main {
   /**
    * TODO Comment here
    * 
-   * @author $Author: croesch $
+   * @author croesch
    * @since 10.12.2009
    * @param args the array of arguments
    */

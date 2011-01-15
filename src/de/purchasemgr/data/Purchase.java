@@ -1,7 +1,6 @@
 package de.purchasemgr.data;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,13 +10,10 @@ import de.purchasemgr.i18n.Messages;
 /**
  * This is the representation for a purchase, the clone from the reality.
  * 
- * @author $Author: croesch $
- * @version $Revision: 1.2 $ ($Date: 2010/12/19 00:03:13 $)
+ * @author croesch
+ * @since Date: 2010/12/19 00:03:13
  */
 class Purchase {
-
-  /** Version number. */
-  public static final String VER = "$Revision: 1.2 $"; //$NON-NLS-1$
 
   private final Date date;
 
@@ -44,7 +40,7 @@ class Purchase {
 
   @Override
   public String toString() {
-    DateFormat sdf = SimpleDateFormat.getDateInstance(DateFormat.MEDIUM);
+    DateFormat sdf = DateFormat.getDateInstance(DateFormat.MEDIUM);
     return Messages.PURCHASE_STRING.text(sdf.format(this.date), this.shop.toString());
   }
 

@@ -1,7 +1,6 @@
 package de.purchasemgr.logging;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
@@ -10,12 +9,10 @@ import de.purchasemgr.i18n.Messages;
 /**
  * TODO Comment here
  * 
- * @author $Author: croesch $
- * @version $Revision: 1.2 $ ($Date: 2010/12/19 00:03:13 $)
+ * @author croesch
+ * @since Date: 2010/12/19 00:03:13
  */
 public class LogManager {
-  /** Version number. */
-  public static final String VER = "$Revision: 1.2 $"; //$NON-NLS-1$
 
   /**
    * Logs the given message to the info log stream
@@ -34,7 +31,7 @@ public class LogManager {
    * @param err whether the message is an error message
    */
   public static void log(String msg, boolean err) {
-    DateFormat df = SimpleDateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM, Locale.GERMAN);
+    DateFormat df = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM, Locale.GERMAN);
     String date = df.format(new Date());
     if (err) {
       String txt = Messages.LOG_ERROR.text(date, msg);

@@ -5,13 +5,10 @@ import de.purchasemgr.i18n.Messages;
 /**
  * This is a shop-object that represents a real shop.
  * 
- * @author $Author: croesch $
- * @version $Revision: 1.2 $ ($Date: 2010/12/19 00:03:13 $)
+ * @author croesch
+ * @since Date: 2010/12/19 00:03:13
  */
 public class Shop {
-
-  /** Version number. */
-  public static final String VER = "$Revision: 1.2 $"; //$NON-NLS-1$
 
   private final String name, postCode, location;
 

@@ -10,16 +10,13 @@ import javax.swing.JMenuBar;
 /**
  * TODO Comment here
  * 
- * @author $Author: croesch $
- * @version $Revision: 1.2 $ ($Date: 2010/12/18 18:32:23 $)
+ * @author croesch
+ * @since Date: 2010/12/18 18:32:23
  */
 public class Window extends JFrame {
 
   /** generated version UID */
   private static final long serialVersionUID = 5731315424494348485L;
-
-  /** Version number. */
-  public static final String VER = "$Revision: 1.2 $"; //$NON-NLS-1$
 
   Window(JComponent comp, int width, int height, JMenuBar menubar, String title) {
     Toolkit kit = Toolkit.getDefaultToolkit();

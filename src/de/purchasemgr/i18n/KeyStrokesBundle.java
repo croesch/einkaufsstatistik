@@ -10,8 +10,8 @@ import java.util.PropertyResourceBundle;
 /**
  * Connection to the keystrokes file.
  * 
- * @author $Author: croesch $
- * @version $Revision: 1.1 $ ($Date: 2010/12/19 12:56:24 $)
+ * @author croesch
+ * @since Date: 2010/12/19 12:56:24
  */
 class KeyStrokesBundle extends PropertyResourceBundle {
 

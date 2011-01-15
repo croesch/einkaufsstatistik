@@ -6,16 +6,13 @@ import javax.swing.JMenu;
 /**
  * This menu is able to set its mnemonic key automatically.
  * 
- * @author $Author: croesch $
- * @version $Revision: 1.1 $ ($Date: 2010/12/19 12:56:24 $)
+ * @author croesch
+ * @since Date: 2010/12/19 12:56:24 $)
  */
 public class CMenu extends JMenu {
 
   /** version UID */
   private static final long serialVersionUID = -8285015108385978148L;
-
-  /** Version number. */
-  public static final String VER = "$Revision: 1.1 $"; //$NON-NLS-1$
 
   /**
    * Simply calls {@link JMenu#JMenu()}

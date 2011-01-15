@@ -5,8 +5,8 @@ import de.purchasemgr.i18n.Messages;
 /**
  * The actions that are used in the program
  * 
- * @author $Author: croesch $
- * @version ($Date: 2010/12/19 12:56:24 $)
+ * @author croesch
+ * @since Date: 2010/12/19 12:56:24
  */
 public enum ActionPool {
 
@@ -75,13 +75,24 @@ public enum ActionPool {
   /** action to view and edit the items */
   EDIT_ITEMS (Messages.MB_EDIT_ITEMS);
 
-  /** Version number. */
-  public static final String VER = "$Revision: 1.5 $"; //$NON-NLS-1$
-
   private MainAction action;
 
+  private final String message;
+
   private ActionPool(Messages msg) {
-    this.action = new MainAction(msg.text());
+    this.message = msg.text();
+    this.action = new MainAction(this);
+  }
+
+  /**
+   * Returns the text message of this action
+   * 
+   * @author croesch
+   * @since Date: 15.01.2011 14:16:19
+   * @return the text of this action
+   */
+  public String text() {
+    return this.message;
   }
 
   /**
@@ -90,5 +101,4 @@ public enum ActionPool {
   public MainAction getAction() {
     return this.action;
   }
-
 }

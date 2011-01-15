@@ -3,8 +3,8 @@ package de.purchasemgr.i18n;
 /**
  * Provides Strings not needed for i18n
  * 
- * @author $Author: croesch $
- * @version $Revision: 1.4 $ ($Date: 2010/12/19 14:41:45 $)
+ * @author croesch
+ * @since Date: 2010/12/19 14:41:45
  */
 @SuppressWarnings("nls")
 public enum Strings {

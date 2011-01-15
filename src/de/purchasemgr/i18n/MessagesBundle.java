@@ -7,8 +7,8 @@ import java.util.ResourceBundle;
 /**
  * Connection to the messages file. Doesn't throw an exception if a key wasn't found.
  * 
- * @author $Author: croesch $
- * @version $Revision: 1.3 $ ($Date: 2010/12/19 14:41:45 $)
+ * @author croesch
+ * @since Date: 2010/12/19 14:41:45
  */
 class MessagesBundle extends ResourceBundle {
 
