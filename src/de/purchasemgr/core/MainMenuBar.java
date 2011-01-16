@@ -28,7 +28,7 @@ public class MainMenuBar extends JMenuBar {
    * @since Date: 16.01.2011 16:18:13
    */
   public MainMenuBar() {
-    JMenuBar mb = new JMenuBar();
+
     JMenu menu, edit, stat, help, statPurchase, statExpenses;
     JMenuItem newFile, save, open, exit, items, shops, general;
     JMenuItem purchaseShop, purchaseWDay, purchaseMonth, purchaseYear, purchaseItems, expensesShop;
@@ -148,9 +148,10 @@ public class MainMenuBar extends JMenuBar {
     help.addSeparator();
     help.add(about);
 
-    mb.add(menu);
-    mb.add(edit);
-    mb.add(stat);
-    mb.add(help);
+    add(menu);
+    add(edit);
+    add(stat);
+    add(help);
+
   }
 }

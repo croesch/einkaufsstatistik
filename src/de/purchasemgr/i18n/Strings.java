@@ -22,7 +22,10 @@ public enum Strings {
   EMPTY_STRING (""),
 
   /** the regular expression to find a mnemonic */
-  REGEX_MNEMONIC ("\\[(.)\\]");
+  REGEX_MNEMONIC ("\\[(.)\\]"),
+
+  /** the string for the word right used for mig layout */
+  RIGHT ("right");
 
   private final String string;
 

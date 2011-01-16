@@ -28,6 +28,10 @@ public class MainAction extends AbstractAction {
     this.id = id.ordinal();
   }
 
+  static void start() {
+    controller.start();
+  }
+
   private void exit() {
     System.exit(0);
   }

@@ -4,6 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import net.miginfocom.swing.MigLayout;
 import de.crhcomponents.components.CButton;
 import de.purchasemgr.ActionPool;
 import de.purchasemgr.Main;
@@ -50,22 +51,25 @@ public class MainView {
     this.aboutWindow.setVisible(true);
   }
 
+  @SuppressWarnings("nls")
   private Window createMainWindow() {
 
     final JPanel contentPanel = new JPanel();
     final JPanel buttonsPanel = new JPanel();
+    contentPanel.setLayout(new MigLayout("", "[grow][]", "[grow]"));
+    buttonsPanel.setLayout(new MigLayout());
 
     //Buttons
     CButton newPurch = new CButton(ActionPool.NEW_PURCHASE.getAction());
     CButton editPurch = new CButton(ActionPool.EDIT_PURCHASE.getAction());
     CButton deletePurch = new CButton(ActionPool.DEL_PURCHASE.getAction());
 
-    buttonsPanel.add(newPurch);
-    buttonsPanel.add(editPurch);
-    buttonsPanel.add(deletePurch);
+    buttonsPanel.add(newPurch, "cell 0 0,sg");
+    buttonsPanel.add(editPurch, "cell 0 1,sg");
+    buttonsPanel.add(deletePurch, "cell 0 2,sg");
 
-    // TODO   contentPanel.add(this.listScroller);
-    contentPanel.add(buttonsPanel);
+    contentPanel.add(this.controller.getPurchaseList(), "cell 0 0, grow");
+    contentPanel.add(buttonsPanel, "cell 1 0,alignx right,aligny center");
 
     return new Window(contentPanel, WIDTH, HEIGHT, new MainMenuBar(), Main.NAME);
   }

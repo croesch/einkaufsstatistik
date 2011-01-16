@@ -28,8 +28,7 @@ public class ShopController {
    * @return a {@link JComboBox} that contains all {@link Shop}s available
    */
   public JComboBox getShopBox() {
-    //TODO implement this
-    return null;
+    return this.view.getBox(this.model.getShops());
   }
 
   /**

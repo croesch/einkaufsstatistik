@@ -1,7 +1,8 @@
 package de.purchasemgr.core.purchase;
 
-import java.awt.Dimension;
+import java.awt.Component;
 import java.awt.event.ActionEvent;
+import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -67,7 +68,6 @@ public class PurchaseView {
     this.purchaseList.setVisibleRowCount(-1);
 
     this.scrollingPurchaseList = new JScrollPane(this.purchaseList);
-    this.scrollingPurchaseList.setPreferredSize(new Dimension(200, 300));
   }
 
   void edit(Purchase toEdit) {
@@ -170,5 +170,10 @@ public class PurchaseView {
         LogManager.log(Messages.LOG_ACTION_ERROR.text(e.getActionCommand()));
       }
     }
+  }
+
+  Component getPurchaseList(List<Purchase> list) {
+    this.purchaseList.setListData(list.toArray());
+    return this.scrollingPurchaseList;
   }
 }

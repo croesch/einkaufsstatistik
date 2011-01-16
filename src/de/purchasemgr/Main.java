@@ -1,6 +1,5 @@
 package de.purchasemgr;
 
-import de.purchasemgr.core.MainController;
 import de.purchasemgr.i18n.Messages;
 import de.purchasemgr.i18n.Strings;
 
@@ -37,8 +36,7 @@ public class Main {
    * @param args the array of arguments
    */
   public static void main(String[] args) {
-    MainController controller = new MainController();
-    controller.start();
+    MainAction.start();
   }
 
 }

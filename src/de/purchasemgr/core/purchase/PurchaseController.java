@@ -1,5 +1,6 @@
 package de.purchasemgr.core.purchase;
 
+import java.awt.Component;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -71,7 +72,7 @@ public class PurchaseController {
    * @since Date: 15.01.2011 16:22:35
    * @return a list of the purchases
    */
-  public List<Purchase> getList() {
+  List<Purchase> getList() {
     return this.model.getPurchases();
   }
 
@@ -104,5 +105,16 @@ public class PurchaseController {
 
   Shop getShopForIndex(int i) {
     return this.sController.getShopForIndex(i);
+  }
+
+  /**
+   * Returns the list of purchases to display
+   * 
+   * @author croesch
+   * @since Date: 16.01.2011 19:21:45
+   * @return a component that could be added to a frame to display the list
+   */
+  public Component getPurchaseList() {
+    return this.view.getPurchaseList(getList());
   }
 }

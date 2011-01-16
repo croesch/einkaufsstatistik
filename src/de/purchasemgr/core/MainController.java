@@ -1,5 +1,7 @@
 package de.purchasemgr.core;
 
+import java.awt.Component;
+
 import de.purchasemgr.core.purchase.PurchaseController;
 import de.purchasemgr.core.shop.ShopController;
 import de.purchasemgr.data.type.Shop;
@@ -98,5 +100,9 @@ public class MainController {
    */
   public void editShops() {
     this.sController.editShops();
+  }
+
+  Component getPurchaseList() {
+    return this.pController.getPurchaseList();
   }
 }
