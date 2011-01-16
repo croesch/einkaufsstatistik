@@ -10,7 +10,6 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import de.crhcomponents.components.CButton;
-import de.purchasemgr.ActionPool;
 import de.purchasemgr.data.type.Shop;
 import de.purchasemgr.gui.Window;
 import de.purchasemgr.i18n.Messages;
@@ -46,7 +45,9 @@ class ShopView {
 
   private final Window newShopFrame, editShopFrame;
 
-  public ShopView(ShopController cont) {
+  private ShopAction editNext, editPrevious;
+
+  ShopView(ShopController cont) {
     this.controller = cont;
     this.newShopFrame = createNewShopFrame();
     this.editShopFrame = createEditShopFrame();
@@ -61,8 +62,8 @@ class ShopView {
   private Window createNewShopFrame() {
     JPanel pan = new JPanel();
 
-    CButton createShopBtn = new CButton(ActionPool.NEW_SHOP_OK.getAction());
-    CButton stopCreatingShopBtn = new CButton(ActionPool.NEW_SHOP_CANCEL.getAction());
+    CButton createShopBtn = new CButton(new ShopAction(ShopAction.NEW_SAVE));
+    CButton stopCreatingShopBtn = new CButton(new ShopAction(ShopAction.NEW_CANCEL));
 
     final JLabel newShopNameLbl = new JLabel(Messages.SHOP_NAME.text());
     final JLabel newShopPostCodeLbl = new JLabel(Messages.SHOP_POSTCODE.text());
@@ -98,10 +99,12 @@ class ShopView {
     final JLabel shopNameLbl = new JLabel(Messages.SHOP_NAME.text());
     final JLabel shopPostCodeLbl = new JLabel(Messages.SHOP_POSTCODE.text());
     final JLabel shopLocationLbl = new JLabel(Messages.SHOP_LOCATION.text());
-    CButton cancelShopBtn = new CButton(ActionPool.EDIT_SHOPS_CAN.getAction());
-    CButton prevShopBtn = new CButton(ActionPool.EDIT_SHOPS_PRE.getAction());
-    CButton nextShopBtn = new CButton(ActionPool.EDIT_SHOPS_NXT.getAction());
-    CButton applyShopBtn = new CButton(ActionPool.EDIT_SHOPS_SAV.getAction());
+    this.editNext = new ShopAction(ShopAction.EDIT_NEXT);
+    this.editPrevious = new ShopAction(ShopAction.EDIT_PREVIOUS);
+    CButton cancelShopBtn = new CButton(new ShopAction(ShopAction.EDIT_CANCEL));
+    CButton prevShopBtn = new CButton(this.editPrevious);
+    CButton nextShopBtn = new CButton(this.editNext);
+    CButton applyShopBtn = new CButton(new ShopAction(ShopAction.EDIT_SAVE));
 
     pan.add(shopIndexDescLbl);
     pan.add(shopIndexLabel);
@@ -122,16 +125,9 @@ class ShopView {
   void editShop(int ind, Shop index) {
     shopIndexLabel.setText(Messages.SHOP_EDIT_INDEX_VALUE.text(String.valueOf(ind), String.valueOf(this.controller
       .getShopCount())));
-    if (ind >= this.controller.getShopCount()) {
-      ActionPool.EDIT_SHOPS_NXT.getAction().setEnabled(false);
-    } else {
-      ActionPool.EDIT_SHOPS_NXT.getAction().setEnabled(true);
-    }
-    if (ind <= 1) {
-      ActionPool.EDIT_SHOPS_PRE.getAction().setEnabled(false);
-    } else {
-      ActionPool.EDIT_SHOPS_PRE.getAction().setEnabled(true);
-    }
+
+    this.editNext.setEnabled(ind < this.controller.getShopCount());
+    this.editPrevious.setEnabled(ind > 1);
 
     this.shopName.setText(index.getName());
     this.shopPostCode.setText(index.getPostCode());
@@ -142,7 +138,6 @@ class ShopView {
   }
 
   void newShop() {
-    //#################### ==> new shop <== ####################
     this.newShopNumber
       .setText(Messages.SHOP_NEW_INDEX_VALUE.text(String.valueOf((this.controller.getShopCount() + 1))));
 
@@ -154,7 +149,7 @@ class ShopView {
     this.newShopFrame.setVisible(true);
   }
 
-  public void addShop() {
+  void addShop() {
     String name = this.newShopNameField.getText();
     String postCode = this.newShopPostCodeField.getText();
     String location = this.newShopLocationField.getText();

@@ -38,22 +38,6 @@ public enum ActionPool {
   EDIT_SHOPS (Messages.MB_EDIT_MANAGESHOPS),
   /** action to add a new shop */
   NEW_SHOP (Messages.MB_EDIT_ADDSHOP),
-  /** action to save the new added shop */
-  NEW_SHOP_OK (Messages.SHOP_NEW_SAVE),
-  /** action to cancel the new added shop */
-  NEW_SHOP_CANCEL (Messages.SHOP_NEW_CANCEL),
-  /** action to choose previous shop to edit */
-  EDIT_SHOPS_PRE (Messages.SHOP_EDIT_PREV),
-  /** action to choose next shop to edit */
-  EDIT_SHOPS_NXT (Messages.SHOP_EDIT_NEXT),
-  /** action to save edited shops */
-  EDIT_SHOPS_SAV (Messages.SHOP_EDIT_SAVE),
-  /** action to cancel editing shops */
-  EDIT_SHOPS_CAN (Messages.SHOP_EDIT_CANC),
-  /** action to add the new purchase */
-  NEW_PURCHASE_SAVE (Messages.PURCHASE_NEW_SAVE),
-  /** action to cancel adding a new purchase */
-  NEW_PURCHASE_CAN (Messages.PURCHASE_NEW_CANC),
   /** name for item to create a new purchase */
   NEW_PURCHASE (Messages.PURCHASE_NEW),
   /** name for item to edit selected purchase */

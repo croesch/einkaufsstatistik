@@ -17,8 +17,6 @@ import de.crhcomponents.components.CMenu;
 import de.crhcomponents.components.CMenuItem;
 import de.purchasemgr.ActionPool;
 import de.purchasemgr.Main;
-import de.purchasemgr.MainAction;
-import de.purchasemgr.data.DataModel;
 import de.purchasemgr.i18n.KeyStrokes;
 import de.purchasemgr.i18n.Messages;
 
@@ -29,8 +27,6 @@ import de.purchasemgr.i18n.Messages;
  * @since $Revision: 1.11 $ Date: 2010/12/19 12:56:24
  */
 public class GUIManager {
-
-  private final DataModel model;
 
   private static final int HSPACE = 20;
 
@@ -48,8 +44,6 @@ public class GUIManager {
 
   //		private DataModel dataModel = new DataModel(this);
   static JLabel shopIndexLabel = new JLabel();
-
-  public int nr;
 
   int max;
 
@@ -217,18 +211,11 @@ public class GUIManager {
     this.contentPanel.add(this.buttons);
   }
 
-  public GUIManager(DataModel model) {
-    MainAction.init(this);
-    model.setGUI(this);
-    this.model = model;
+  public GUIManager() {
     initialize();
     this.mainWindow = new Window(this.contentPanel, this.width, this.height, createMainMenuBar(), Main.NAME);
     this.mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-  }
-
-  public DataModel getModel() {
-    return this.model;
   }
 
   public void setVisible(boolean vis) {

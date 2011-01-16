@@ -20,8 +20,6 @@ public class MainAction extends AbstractAction {
   /** generated version UID */
   private static final long serialVersionUID = 1L;
 
-  private static GUIManager gui;
-
   private static MainController controller = new MainController();
 
   private final int id;
@@ -38,24 +36,18 @@ public class MainAction extends AbstractAction {
   public void actionPerformed(ActionEvent e) {
     if (this.id == ActionPool.EXIT.ordinal()) {
       exit();
-    } else if (this.id == ActionPool.EDIT_SHOPS_NXT.ordinal()) {
-      gui.editShopsRefresh(++gui.nr);
-    } else if (this.id == ActionPool.EDIT_SHOPS_PRE.ordinal()) {
-      gui.editShopsRefresh(--gui.nr);
-    } else if (this.id == ActionPool.EDIT_SHOPS_NXT.ordinal()) {
-      gui.getModel().editShops(gui.nr);
     } else if (this.id == ActionPool.ABOUT.ordinal()) {
       GUIManager.about();
     } else if (this.id == ActionPool.NEW_PURCHASE.ordinal()) {
-      if (gui.getModel().getShops().toArray().length == 0 || gui.getModel().getShops() == null) {
+      if (controller.getShopCount() == 0) {
         LogManager.log(Messages.LOG_NOSHOPFORPURCHASE.text(), true);
       } else {
         controller.newPurchase();
       }
     } else if (this.id == ActionPool.EDIT_SHOPS.ordinal()) {
-      gui.editShops(0);
+      controller.editShops();
     } else if (this.id == ActionPool.NEW_SHOP.ordinal()) {
-      gui.editShops(1);
+      controller.newShop();
     } else if (this.id == ActionPool.EDIT_PURCHASE.ordinal()) {
       controller.editSelectedPurchase();
     } else if (this.id == ActionPool.DEL_PURCHASE.ordinal()) {
@@ -64,14 +56,4 @@ public class MainAction extends AbstractAction {
       LogManager.log(Messages.LOG_ACTION_ERROR.text(e.getActionCommand()));
     }
   }
-
-  /**
-   * sets the GUIManager for the MainAction
-   * 
-   * @param guim the new GUIManager
-   */
-  public static void init(GUIManager guim) {
-    MainAction.gui = guim;
-  }
-
 }

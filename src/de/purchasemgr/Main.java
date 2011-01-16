@@ -1,6 +1,5 @@
 package de.purchasemgr;
 
-import de.purchasemgr.data.DataModel;
 import de.purchasemgr.gui.GUIManager;
 import de.purchasemgr.i18n.Messages;
 import de.purchasemgr.i18n.Strings;
@@ -38,8 +37,7 @@ public class Main {
    * @param args the array of arguments
    */
   public static void main(String[] args) {
-    DataModel model = new DataModel();
-    GUIManager gui = new GUIManager(model);
+    GUIManager gui = new GUIManager();
     gui.setVisible(true);
   }
 

@@ -41,11 +41,17 @@ public class ShopController {
    * @return the shop on that index
    */
   public Shop getShopForIndex(int i) {
-    //TODO implement this
-    return null;
+    return this.model.get(i);
   }
 
-  int getShopCount() {
+  /**
+   * Returns the number of available shops
+   * 
+   * @author croesch
+   * @since Date: 16.01.2011 16:07:38
+   * @return the number of shops that are available
+   */
+  public int getShopCount() {
     return this.model.getShopCount();
   }
 
@@ -57,6 +63,22 @@ public class ShopController {
     this.model.set(this.editIndex, new Shop(name, postCode, location));
   }
 
+  /**
+   * Opens the window for creating a {@link Shop}
+   * 
+   * @author croesch
+   * @since Date: 16.01.2011 16:08:25
+   */
+  public void newShop() {
+    this.view.newShop();
+  }
+
+  /**
+   * Opens the window to edit the available {@link Shop}s
+   * 
+   * @author croesch
+   * @since Date: 16.01.2011 16:08:58
+   */
   public void editShops() {
     if (this.editIndex >= 0) {
       this.view.editShop(this.editIndex + 1, this.model.get(this.editIndex));

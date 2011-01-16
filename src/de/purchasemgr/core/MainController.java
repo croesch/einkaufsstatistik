@@ -2,6 +2,7 @@ package de.purchasemgr.core;
 
 import de.purchasemgr.core.purchase.PurchaseController;
 import de.purchasemgr.core.shop.ShopController;
+import de.purchasemgr.data.type.Shop;
 
 /**
  * This is the controller for the whole program and is the layer that acts with the different controllers
@@ -43,5 +44,36 @@ public class MainController {
    */
   public void removeSelectedPurchase() {
     this.pController.removeSelectedPurchase();
+  }
+
+  /**
+   * Returns the number of available shops
+   * 
+   * @author croesch
+   * @since Date: 16.01.2011 16:05:21
+   * @return the number of available {@link Shop}s
+   */
+  public int getShopCount() {
+    return this.sController.getShopCount();
+  }
+
+  /**
+   * Start creating a new {@link Shop}
+   * 
+   * @author croesch
+   * @since Date: 16.01.2011 16:05:55
+   */
+  public void newShop() {
+    this.sController.newShop();
+  }
+
+  /**
+   * Start editing the available {@link Shop}s
+   * 
+   * @author croesch
+   * @since Date: 16.01.2011 16:06:28
+   */
+  public void editShops() {
+    this.sController.editShops();
   }
 }
