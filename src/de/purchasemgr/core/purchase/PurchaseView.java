@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -16,7 +15,6 @@ import javax.swing.ListSelectionModel;
 
 import net.miginfocom.swing.MigLayout;
 import de.crhcomponents.components.CButton;
-import de.purchasemgr.core.shop.ShopController;
 import de.purchasemgr.data.type.Purchase;
 import de.purchasemgr.data.type.Shop;
 import de.purchasemgr.gui.Window;
@@ -44,8 +42,6 @@ public class PurchaseView {
 
   private final PurchaseController controller;
 
-  private final ShopController shopController;
-
   private final JList purchaseList = new JList();
 
   private JScrollPane scrollingPurchaseList;
@@ -56,12 +52,10 @@ public class PurchaseView {
    * @author croesch
    * @since Date: 15.01.2011 17:20:01
    * @param cont the controller of this view
-   * @param sContr the {@link ShopController} of the program instance
    */
-  public PurchaseView(PurchaseController cont, ShopController sContr) {
+  public PurchaseView(PurchaseController cont) {
     this.controller = cont;
-    this.shopController = sContr;
-    this.shopField = this.shopController.getShopBox();
+    this.shopField = this.controller.getShopBox();
     this.newPurchase = createNewPurchaseFrame();
 
     initList();
@@ -87,32 +81,35 @@ public class PurchaseView {
   @SuppressWarnings("nls")
   private Window createNewPurchaseFrame() {
 
+    // constants to define the layout constraints
     final String empty = Strings.EMPTY_STRING.text();
     final String migEmpty = "[]";
     final String columConstraints = migEmpty + "[30lp][30lp][30lp][30lp][grow]";
     final String rowConstraints = migEmpty + migEmpty + "[grow]" + migEmpty;
 
-    JLabel dateDesc = new JLabel(Messages.PURCHASE_NEW_DATE.text());
-
+    // panels used to group the content of the frame
     JPanel pan = new JPanel();
     pan.setLayout(new MigLayout(empty, columConstraints, rowConstraints));
+    JPanel buttonsPan = new JPanel();
+    buttonsPan.setLayout(new MigLayout(empty, migEmpty + migEmpty, migEmpty));
+
+    // components of the frame
+    JLabel dateDesc = new JLabel(Messages.PURCHASE_NEW_DATE.text());
+    JLabel shopDesc = new JLabel(Messages.PURCHASE_NEW_SHOP.text());
+    CButton savePurchase = new CButton(new PurchaseAction(PurchaseAction.NEW_SAVE));
+    CButton cancel = new CButton(new PurchaseAction(PurchaseAction.NEW_CANCEL));
+
+    //put the components to the labels
+    buttonsPan.add(savePurchase, "cell 0 0, sg");
+    buttonsPan.add(cancel, "cell 1 0, sg");
 
     pan.add(dateDesc, "cell 0 0, alignx left, aligny center");
     pan.add(this.dayField, "cell 2 0, growx, aligny center");
     pan.add(this.monthField, "cell 3 0, growx, aligny center");
     pan.add(this.yearField, "cell 4 0, growx, aligny center");
-    JLabel shopDesc = new JLabel(Messages.PURCHASE_NEW_SHOP.text());
     pan.add(shopDesc, "cell 0 1, alignx left, aligny center");
     pan.add(this.shopField, "cell 2 1 3 1, growx, aligny center");
-
-    JPanel panel = new JPanel();
-    pan.add(panel, "cell 0 3 6 1,alignx right");
-    panel.setLayout(new MigLayout(empty, migEmpty + migEmpty, migEmpty));
-
-    JButton createPurch = new CButton(new PurchaseAction(PurchaseAction.NEW_SAVE));
-    panel.add(createPurch, "cell 0 0, sg");
-    JButton cancelNewPurch = new CButton(new PurchaseAction(PurchaseAction.NEW_CANCEL));
-    panel.add(cancelNewPurch, "cell 1 0, sg");
+    pan.add(buttonsPan, "cell 0 3 6 1,alignx right");
 
     return new Window(pan, 400, 200, null, Messages.PURCHASE_NEW.text());
   }
@@ -131,7 +128,7 @@ public class PurchaseView {
   }
 
   void addPurchase() {
-    final Shop selectedShop = this.shopController.getShopForIndex(this.shopField.getSelectedIndex());
+    final Shop selectedShop = this.controller.getShopForIndex(this.shopField.getSelectedIndex());
     this.controller.createPurchase(this.dayField.getText(), this.monthField.getText(), this.yearField.getText(),
                                    selectedShop);
   }

@@ -4,9 +4,13 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import javax.swing.JComboBox;
+
 import de.purchasemgr.core.shop.ShopController;
 import de.purchasemgr.data.type.Purchase;
 import de.purchasemgr.data.type.Shop;
+import de.purchasemgr.i18n.Messages;
+import de.purchasemgr.logging.LogManager;
 
 /**
  * This is the purchase controller, it controls all things that have to do with {@link Purchase}s
@@ -31,7 +35,7 @@ public class PurchaseController {
    */
   public PurchaseController(ShopController sCont) {
     this.sController = sCont;
-    this.view = new PurchaseView(this, this.sController);
+    this.view = new PurchaseView(this);
   }
 
   /**
@@ -75,7 +79,11 @@ public class PurchaseController {
    * deletes the selected purchase, logs if that couldn't be done
    */
   public void removeSelectedPurchase() {
-    this.model.remove(this.view.getSelectedPurchaseIndex());
+    try {
+      this.model.remove(this.view.getSelectedPurchaseIndex());
+    } catch (IndexOutOfBoundsException e) {
+      LogManager.log(Messages.LOG_NOPURCHASETOEDIT.text(), true);
+    }
   }
 
   /**
@@ -85,6 +93,16 @@ public class PurchaseController {
     Purchase selected = this.model.get(this.view.getSelectedPurchaseIndex());
     if (selected != null) {
       this.view.edit(selected);
+    } else {
+      LogManager.log(Messages.LOG_NOPURCHASETOEDIT.text(), true);
     }
+  }
+
+  JComboBox getShopBox() {
+    return this.sController.getShopBox();
+  }
+
+  Shop getShopForIndex(int i) {
+    return this.sController.getShopForIndex(i);
   }
 }

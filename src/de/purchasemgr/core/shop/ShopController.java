@@ -3,6 +3,8 @@ package de.purchasemgr.core.shop;
 import javax.swing.JComboBox;
 
 import de.purchasemgr.data.type.Shop;
+import de.purchasemgr.i18n.Messages;
+import de.purchasemgr.logging.LogManager;
 
 /**
  * This is the shop controller, it controls all things that have to do with {@link Shop}s
@@ -11,6 +13,10 @@ import de.purchasemgr.data.type.Shop;
  * @since Date: 16.01.2011 12:47:28
  */
 public class ShopController {
+
+  private final ShopModel model = new ShopModel();
+
+  private final ShopView view = new ShopView(this);
 
   /**
    * Returns a combobox that contains all available shops
@@ -35,6 +41,19 @@ public class ShopController {
   public Shop getShopForIndex(int i) {
     //TODO implement this
     return null;
+  }
+
+  int getShopCount() {
+    return this.model.getShopCount();
+  }
+
+  public void editShops() {
+    int nr = getShopCount();
+    if (nr > 0) {
+      this.view.editShop(--nr, this.model.get(nr));
+    } else {
+      LogManager.log(Messages.LOG_NOSHOPSTOEDIT.text());
+    }
   }
 
 }

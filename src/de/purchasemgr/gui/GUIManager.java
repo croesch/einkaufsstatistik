@@ -11,7 +11,6 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTextField;
 
 import de.crhcomponents.components.CButton;
 import de.crhcomponents.components.CMenu;
@@ -20,11 +19,8 @@ import de.purchasemgr.ActionPool;
 import de.purchasemgr.Main;
 import de.purchasemgr.MainAction;
 import de.purchasemgr.data.DataModel;
-import de.purchasemgr.data.type.Shop;
 import de.purchasemgr.i18n.KeyStrokes;
 import de.purchasemgr.i18n.Messages;
-import de.purchasemgr.i18n.Strings;
-import de.purchasemgr.logging.LogManager;
 
 /**
  * The manager for everything that has to do with GUI TODO change this and remove this central class
@@ -50,39 +46,10 @@ public class GUIManager {
 
   private final JPanel buttons = new JPanel();
 
-  private final JPanel newShopPanel = new JPanel(new GridLayout(5, 2, HSPACE, VSPACE));
-
   //		private DataModel dataModel = new DataModel(this);
   static JLabel shopIndexLabel = new JLabel();
 
-  private final JLabel shopIndexDescLbl = new JLabel(Messages.SHOP_EDIT_INDEX.text());
-
-  private JButton nextShopBtn, prevShopBtn, applyShopBtn, cancelShopBtn;
-
-  private final JPanel shopPanel = new JPanel(new GridLayout(6, 2, HSPACE, VSPACE));
-
-  private final JLabel newShopLabel = new JLabel(Messages.SHOP_NEW_INDEX.text()), newShopNumber = new JLabel();
-
   private JButton createShopBtn, stopCreatingShopBtn;
-
-  private final JLabel newShopNameLbl = new JLabel(Messages.SHOP_NAME.text());
-
-  private final JLabel newShopPostCodeLbl = new JLabel(Messages.SHOP_POSTCODE.text());
-
-  private final JLabel newShopLocationLbl = new JLabel(Messages.SHOP_LOCATION.text());
-
-  private final JTextField newShopNameField = new JTextField(), newShopPostCodeField = new JTextField();
-
-  private final JTextField newShopLocationField = new JTextField();
-
-  private final JLabel shopNameLbl = new JLabel(Messages.SHOP_NAME.text());
-
-  private final JLabel shopPostCodeLbl = new JLabel(Messages.SHOP_POSTCODE.text());
-
-  private final JLabel shopLocationLbl = new JLabel(Messages.SHOP_LOCATION.text());
-
-  private final JTextField shopName = new JTextField(), shopPostCode = new JTextField(),
-          shopLocation = new JTextField();
 
   public int nr;
 
@@ -99,48 +66,6 @@ public class GUIManager {
   Window mainWindow;
 
   /**
-   * @return the text of the shop-name field in the new shop frame
-   */
-  public String getNewShopName() {
-    return this.newShopNameField.getText();
-  }
-
-  /**
-   * @return the text of the shop-postcode field in the new shop frame
-   */
-  public String getNewShopPostCode() {
-    return this.newShopPostCodeField.getText();
-  }
-
-  /**
-   * @return the text of the shop-location field in the new shop frame
-   */
-  public String getNewShopLocation() {
-    return this.newShopLocationField.getText();
-  }
-
-  /**
-   * @return the text of the shop-name field
-   */
-  public String getShopName() {
-    return this.shopName.getText();
-  }
-
-  /**
-   * @return the text of the shop-postcode field
-   */
-  public String getShopPostCode() {
-    return this.shopPostCode.getText();
-  }
-
-  /**
-   * @return the text of the shop-location field
-   */
-  public String getShopLocation() {
-    return this.shopLocation.getText();
-  }
-
-  /**
    * show the about frame
    */
   public static void about() {
@@ -151,75 +76,6 @@ public class GUIManager {
       ABOUT_FRAME = new Window(lab, 200, 100, null, titleAbout);
     }
     ABOUT_FRAME.setVisible(true);
-  }
-
-  /**
-   * handles different ways of editing shops
-   * 
-   * @param mode the way to edit: <br>
-   *        0: all shops will be edited <br>
-   *        1: a new shop will be created
-   */
-  public void editShops(int mode) {
-    this.max = this.model.getShops().toArray().length;
-    switch (mode) {
-      case 0:
-        this.nr = this.max;
-        if (this.nr > 0) {
-          editShopsRefresh(--this.nr);
-          this.editShop.setVisible(true);
-        } else {
-          LogManager.log(Messages.LOG_NOSHOPSTOEDIT.text());
-        }
-        break;
-      case 1:
-        newShop();
-        break;
-      default:
-        throw new IllegalArgumentException(Messages.EXC_ILLARG.text(String.valueOf(mode)));
-    }
-  }
-
-  private void newShop() {
-    //#################### ==> new shop <== ####################
-    this.newShopNumber.setText(Messages.SHOP_NEW_INDEX_VALUE.text(String.valueOf((this.max + 1))));
-
-    this.newShopNameField.setText(Strings.EMPTY_STRING.text());
-    this.newShopPostCodeField.setText(Strings.EMPTY_STRING.text());
-    this.newShopLocationField.setText(Strings.EMPTY_STRING.text());
-
-    this.newShop.repaint();
-    this.newShop.setVisible(true);
-
-  }
-
-  /**
-   * updates the components of the edit shops frame
-   * 
-   * @param ind the index of the shop to edit
-   */
-  public void editShopsRefresh(int ind) {
-    //#################### ==> edit shop <== ####################
-    shopIndexLabel.setText(Messages.SHOP_EDIT_INDEX_VALUE.text(String.valueOf((ind + 1)), String.valueOf(this.max)));
-    if (ind >= this.max - 1) {
-      ActionPool.EDIT_SHOPS_NXT.getAction().setEnabled(false);
-    } else {
-      ActionPool.EDIT_SHOPS_NXT.getAction().setEnabled(true);
-    }
-    if (ind <= 0) {
-      ActionPool.EDIT_SHOPS_PRE.getAction().setEnabled(false);
-    } else {
-      ActionPool.EDIT_SHOPS_PRE.getAction().setEnabled(true);
-    }
-    Shop index = this.model.getShops().get(ind);
-
-    this.shopName.setText(index.getName());
-    this.shopPostCode.setText(index.getPostCode());
-    this.shopLocation.setText(index.getLocation());
-
-    this.editShop.repaint();
-    this.editShop.setVisible(true);
-
   }
 
   private JMenuBar createMainMenuBar() {
@@ -354,44 +210,6 @@ public class GUIManager {
   }
 
   private void initialize() {
-
-    //#################### ==> edit shop <== ####################
-    this.cancelShopBtn = new CButton(ActionPool.EDIT_SHOPS_CAN.getAction());
-    this.prevShopBtn = new CButton(ActionPool.EDIT_SHOPS_PRE.getAction());
-    this.nextShopBtn = new CButton(ActionPool.EDIT_SHOPS_NXT.getAction());
-    this.applyShopBtn = new CButton(ActionPool.EDIT_SHOPS_SAV.getAction());
-
-    this.shopPanel.add(this.shopIndexDescLbl);
-    this.shopPanel.add(shopIndexLabel);
-    this.shopPanel.add(this.shopNameLbl);
-    this.shopPanel.add(this.shopName);
-    this.shopPanel.add(this.shopPostCodeLbl);
-    this.shopPanel.add(this.shopPostCode);
-    this.shopPanel.add(this.shopLocationLbl);
-    this.shopPanel.add(this.shopLocation);
-    this.shopPanel.add(this.prevShopBtn);
-    this.shopPanel.add(this.nextShopBtn);
-    this.shopPanel.add(this.applyShopBtn);
-    this.shopPanel.add(this.cancelShopBtn);
-
-    this.editShop = new Window(this.shopPanel, 400, 300, null, Messages.SHOP_EDIT.text());
-
-    //#################### ==> create shop <== ####################
-    this.createShopBtn = new CButton(ActionPool.NEW_SHOP_OK.getAction());
-    this.stopCreatingShopBtn = new CButton(ActionPool.NEW_SHOP_CANCEL.getAction());
-
-    this.newShopPanel.add(this.newShopLabel);
-    this.newShopPanel.add(this.newShopNumber);
-    this.newShopPanel.add(this.newShopNameLbl);
-    this.newShopPanel.add(this.newShopNameField);
-    this.newShopPanel.add(this.newShopPostCodeLbl);
-    this.newShopPanel.add(this.newShopPostCodeField);
-    this.newShopPanel.add(this.newShopLocationLbl);
-    this.newShopPanel.add(this.newShopLocationField);
-    this.newShopPanel.add(this.createShopBtn);
-    this.newShopPanel.add(this.stopCreatingShopBtn);
-
-    this.newShop = new Window(this.newShopPanel, 400, 300, null, Messages.SHOP_NEW.text());
 
     //Buttons
     this.newPurch = new CButton(ActionPool.NEW_PURCHASE.getAction());
