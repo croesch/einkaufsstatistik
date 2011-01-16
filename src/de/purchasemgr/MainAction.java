@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
 
+import de.purchasemgr.core.MainController;
 import de.purchasemgr.gui.GUIManager;
 import de.purchasemgr.i18n.Messages;
 import de.purchasemgr.logging.LogManager;
@@ -20,6 +21,8 @@ public class MainAction extends AbstractAction {
   private static final long serialVersionUID = 1L;
 
   private static GUIManager gui;
+
+  private static MainController controller = new MainController();
 
   private final int id;
 
@@ -43,15 +46,13 @@ public class MainAction extends AbstractAction {
       gui.getModel().editShops(gui.nr);
     } else if (this.id == ActionPool.EDIT_SHOPS_CAN.ordinal()) {
       gui.editShop.setVisible(false);
-    } else if (this.id == ActionPool.NEW_PURCHASE_CAN.ordinal()) {
-      gui.newPurchase.setVisible(false);
     } else if (this.id == ActionPool.ABOUT.ordinal()) {
       GUIManager.about();
     } else if (this.id == ActionPool.NEW_PURCHASE.ordinal()) {
       if (gui.getModel().getShops().toArray().length == 0 || gui.getModel().getShops() == null) {
         LogManager.log(Messages.LOG_NOSHOPFORPURCHASE.text(), true);
       } else {
-        gui.newPurchase();
+        controller.newPurchase();
       }
     } else if (this.id == ActionPool.NEW_SHOP_CANCEL.ordinal()) {
       gui.newShop.setVisible(false);
@@ -61,8 +62,6 @@ public class MainAction extends AbstractAction {
       gui.editShops(0);
     } else if (this.id == ActionPool.NEW_SHOP.ordinal()) {
       gui.editShops(1);
-    } else if (this.id == ActionPool.NEW_PURCHASE_SAVE.ordinal()) {
-      gui.getModel().addPurchase();
     } else if (this.id == ActionPool.EDIT_PURCHASE.ordinal()) {
       gui.editPurchase();
     } else if (this.id == ActionPool.DEL_PURCHASE.ordinal()) {

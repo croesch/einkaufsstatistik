@@ -1,4 +1,4 @@
-package de.purchasemgr.data;
+package de.purchasemgr.data.type;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
@@ -13,7 +13,7 @@ import de.purchasemgr.i18n.Messages;
  * @author croesch
  * @since Date: 2010/12/19 00:03:13
  */
-class Purchase {
+public class Purchase {
 
   private final Date date;
 
@@ -21,7 +21,7 @@ class Purchase {
 
   List<Item> items = new ArrayList<Item>();
 
-  Purchase(Date date, Shop shop) {
+  public Purchase(Date date, Shop shop) {
     this.date = date;
     this.shop = shop;
   }

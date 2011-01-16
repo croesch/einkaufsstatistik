@@ -1,4 +1,4 @@
-package de.purchasemgr.data;
+package de.purchasemgr.data.type;
 
 import de.purchasemgr.i18n.Messages;
 
@@ -12,7 +12,7 @@ public class Shop {
 
   private final String name, postCode, location;
 
-  Shop(String name, String postCode, String location) {
+  public Shop(String name, String postCode, String location) {
     this.name = name;
     this.postCode = postCode;
     this.location = location;

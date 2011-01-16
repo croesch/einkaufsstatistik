@@ -1,4 +1,4 @@
-package de.purchasemgr.data;
+package de.purchasemgr.data.type;
 
 import de.purchasemgr.i18n.Messages;
 
@@ -8,7 +8,7 @@ import de.purchasemgr.i18n.Messages;
  * @author croesch
  * @since Date: 2010/12/19 00:03:13
  */
-class Item {
+public class Item {
 
   private final String number;
 

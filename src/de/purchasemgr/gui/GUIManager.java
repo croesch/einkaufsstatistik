@@ -4,7 +4,6 @@ import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -23,8 +22,9 @@ import de.crhcomponents.components.CMenuItem;
 import de.purchasemgr.ActionPool;
 import de.purchasemgr.Main;
 import de.purchasemgr.MainAction;
+import de.purchasemgr.core.purchase.PurchaseController;
 import de.purchasemgr.data.DataModel;
-import de.purchasemgr.data.Shop;
+import de.purchasemgr.data.type.Shop;
 import de.purchasemgr.i18n.KeyStrokes;
 import de.purchasemgr.i18n.Messages;
 import de.purchasemgr.i18n.Strings;
@@ -61,14 +61,6 @@ public class GUIManager {
   //		private DataModel dataModel = new DataModel(this);
   static JLabel shopIndexLabel = new JLabel();
 
-  public JTextField dayField = new JTextField();
-
-  public JTextField monthField = new JTextField();
-
-  public JTextField yearField = new JTextField();
-
-  public JComboBox shopField;
-
   private final JLabel shopIndexDescLbl = new JLabel(Messages.SHOP_EDIT_INDEX.text());
 
   private JButton nextShopBtn, prevShopBtn, applyShopBtn, cancelShopBtn;
@@ -100,12 +92,11 @@ public class GUIManager {
 
   public int nr;
 
+  private final PurchaseController pController = new PurchaseController();
+
   int max;
 
   static Window ABOUT_FRAME;
-
-  /** frame to add a new purchase */
-  public Window newPurchase;
 
   /** frame to edit the shops */
   public Window editShop;
@@ -171,19 +162,6 @@ public class GUIManager {
   }
 
   /**
-   * shows the frame to add a new purchase
-   */
-  public void newPurchase() {
-    //#################### ==> new purchase <== ####################
-    //TODO do we need that??
-    this.shopField.removeAllItems();
-    for (Shop g : this.model.getShops()) {
-      this.shopField.addItem(g);
-    }
-    this.newPurchase.setVisible(true);
-  }
-
-  /**
    * handles different ways of editing shops
    * 
    * @param mode the way to edit: <br>
@@ -216,7 +194,7 @@ public class GUIManager {
   public void editPurchase() {
     //returns -1 if nothing is selected
     if (this.list.getSelectedIndex() >= 0) {
-      System.out.println(this.model.getPurchases().get(this.list.getSelectedIndex()));
+      System.out.println(this.pController.getList().get(this.list.getSelectedIndex()));
     } else {
       LogManager.log(Messages.LOG_NOPURCHASETOEDIT.text(), true);
     }
@@ -228,8 +206,8 @@ public class GUIManager {
   public void removeSelectedPurchase() {
     //returns -1 if nothing is selected
     if (this.list.getSelectedIndex() >= 0) {
-      this.model.getPurchases().remove(this.list.getSelectedIndex());
-      this.list.setListData(this.model.getPurchases().toArray());
+      this.pController.getList().remove(this.list.getSelectedIndex());
+      this.list.setListData(this.pController.getList().toArray());
     } else {
       LogManager.log(Messages.LOG_NOPURCHASETOEDIT.text(), true);
     }
@@ -410,29 +388,6 @@ public class GUIManager {
 
   private void initialize() {
 
-    this.shopField = new JComboBox(this.model.getShops().toArray());
-
-    //#################### ==> new purchase <== ####################
-    JLabel dateDesc = new JLabel(Messages.PURCHASE_NEW_DATE.text());
-    JLabel shopDesc = new JLabel(Messages.PURCHASE_NEW_SHOP.text());
-
-    JButton createPurch, cancelNewPurch;
-    JPanel pan = new JPanel(new GridLayout(3, 2, HSPACE, VSPACE));
-
-    createPurch = new CButton(ActionPool.NEW_PURCHASE_SAVE.getAction());
-    cancelNewPurch = new CButton(ActionPool.NEW_PURCHASE_CAN.getAction());
-
-    pan.add(dateDesc);
-    pan.add(this.dayField);
-    pan.add(this.monthField);
-    pan.add(this.yearField);
-    pan.add(shopDesc);
-    pan.add(this.shopField);
-    pan.add(createPurch);
-    pan.add(cancelNewPurch);
-
-    this.newPurchase = new Window(pan, 400, 200, null, Messages.PURCHASE_NEW.text());
-
     //#################### ==> edit shop <== ####################
     this.cancelShopBtn = new CButton(ActionPool.EDIT_SHOPS_CAN.getAction());
     this.prevShopBtn = new CButton(ActionPool.EDIT_SHOPS_PRE.getAction());
@@ -472,7 +427,7 @@ public class GUIManager {
     this.newShop = new Window(this.newShopPanel, 400, 300, null, Messages.SHOP_NEW.text());
 
     //List of purchases
-    this.list = new JList(this.model.getPurchases().toArray());
+    this.list = new JList(this.pController.getList().toArray());
     this.list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
     this.list.setLayoutOrientation(JList.VERTICAL);
     this.list.setVisibleRowCount(-1);
@@ -514,5 +469,4 @@ public class GUIManager {
       this.mainWindow.setVisible(vis);
     }
   }
-
 }
