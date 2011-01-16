@@ -63,9 +63,9 @@ public class MainAction extends AbstractAction {
     } else if (this.id == ActionPool.NEW_SHOP.ordinal()) {
       gui.editShops(1);
     } else if (this.id == ActionPool.EDIT_PURCHASE.ordinal()) {
-      gui.editPurchase();
+      controller.editSelectedPurchase();
     } else if (this.id == ActionPool.DEL_PURCHASE.ordinal()) {
-      gui.removeSelectedPurchase();
+      controller.removeSelectedPurchase();
     } else {
       LogManager.log(Messages.LOG_ACTION_ERROR.text(e.getActionCommand()));
     }

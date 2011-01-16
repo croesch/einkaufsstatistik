@@ -1,20 +1,17 @@
 package de.purchasemgr.gui;
 
-import java.awt.Dimension;
 import java.awt.GridLayout;
 
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JList;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
-import javax.swing.ListSelectionModel;
 
 import de.crhcomponents.components.CButton;
 import de.crhcomponents.components.CMenu;
@@ -22,7 +19,6 @@ import de.crhcomponents.components.CMenuItem;
 import de.purchasemgr.ActionPool;
 import de.purchasemgr.Main;
 import de.purchasemgr.MainAction;
-import de.purchasemgr.core.purchase.PurchaseController;
 import de.purchasemgr.data.DataModel;
 import de.purchasemgr.data.type.Shop;
 import de.purchasemgr.i18n.KeyStrokes;
@@ -47,8 +43,6 @@ public class GUIManager {
   private final JComponent contentPanel = new JPanel();
 
   private final int width = 400, height = 400;
-
-  public JList list;
 
   private JScrollPane listScroller;
 
@@ -91,8 +85,6 @@ public class GUIManager {
           shopLocation = new JTextField();
 
   public int nr;
-
-  private final PurchaseController pController = new PurchaseController();
 
   int max;
 
@@ -185,31 +177,6 @@ public class GUIManager {
         break;
       default:
         throw new IllegalArgumentException(Messages.EXC_ILLARG.text(String.valueOf(mode)));
-    }
-  }
-
-  /**
-   * opens the editWindow for the selected purchase
-   */
-  public void editPurchase() {
-    //returns -1 if nothing is selected
-    if (this.list.getSelectedIndex() >= 0) {
-      System.out.println(this.pController.getList().get(this.list.getSelectedIndex()));
-    } else {
-      LogManager.log(Messages.LOG_NOPURCHASETOEDIT.text(), true);
-    }
-  }
-
-  /**
-   * deletes the selected purchase, logs if that couldn't be done
-   */
-  public void removeSelectedPurchase() {
-    //returns -1 if nothing is selected
-    if (this.list.getSelectedIndex() >= 0) {
-      this.pController.getList().remove(this.list.getSelectedIndex());
-      this.list.setListData(this.pController.getList().toArray());
-    } else {
-      LogManager.log(Messages.LOG_NOPURCHASETOEDIT.text(), true);
     }
   }
 
@@ -425,15 +392,6 @@ public class GUIManager {
     this.newShopPanel.add(this.stopCreatingShopBtn);
 
     this.newShop = new Window(this.newShopPanel, 400, 300, null, Messages.SHOP_NEW.text());
-
-    //List of purchases
-    this.list = new JList(this.pController.getList().toArray());
-    this.list.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-    this.list.setLayoutOrientation(JList.VERTICAL);
-    this.list.setVisibleRowCount(-1);
-
-    this.listScroller = new JScrollPane(this.list);
-    this.listScroller.setPreferredSize(new Dimension(200, 300));
 
     //Buttons
     this.newPurch = new CButton(ActionPool.NEW_PURCHASE.getAction());

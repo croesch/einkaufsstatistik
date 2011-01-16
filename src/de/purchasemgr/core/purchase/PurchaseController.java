@@ -4,11 +4,12 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import de.purchasemgr.core.shop.ShopController;
 import de.purchasemgr.data.type.Purchase;
 import de.purchasemgr.data.type.Shop;
 
 /**
- * This is the main controller, it controls all data in the main frame
+ * This is the purchase controller, it controls all things that have to do with {@link Purchase}s
  * 
  * @author croesch
  * @since Date: 15.01.2011 15:57:21
@@ -17,7 +18,21 @@ public class PurchaseController {
 
   private final PurchaseModel model = new PurchaseModel();
 
-  private final PurchaseView view = new PurchaseView(this);
+  private final PurchaseView view;
+
+  private final ShopController sController;
+
+  /**
+   * Constructs a new PurchaseController
+   * 
+   * @author croesch
+   * @since Date: 16.01.2011 12:55:37
+   * @param sCont the {@link ShopController} for this instance
+   */
+  public PurchaseController(ShopController sCont) {
+    this.sController = sCont;
+    this.view = new PurchaseView(this, this.sController);
+  }
 
   /**
    * Creates a purchase with the given data and adds it to the intern model
@@ -54,5 +69,22 @@ public class PurchaseController {
    */
   public List<Purchase> getList() {
     return this.model.getPurchases();
+  }
+
+  /**
+   * deletes the selected purchase, logs if that couldn't be done
+   */
+  public void removeSelectedPurchase() {
+    this.model.remove(this.view.getSelectedPurchaseIndex());
+  }
+
+  /**
+   * opens the editWindow for the selected purchase
+   */
+  public void editSelectedPurchase() {
+    Purchase selected = this.model.get(this.view.getSelectedPurchaseIndex());
+    if (selected != null) {
+      this.view.edit(selected);
+    }
   }
 }

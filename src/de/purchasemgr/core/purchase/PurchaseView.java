@@ -1,5 +1,6 @@
 package de.purchasemgr.core.purchase;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 
 import javax.swing.AbstractAction;
@@ -7,11 +8,17 @@ import javax.swing.Action;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 
 import net.miginfocom.swing.MigLayout;
 import de.crhcomponents.components.CButton;
+import de.purchasemgr.core.shop.ShopController;
+import de.purchasemgr.data.type.Purchase;
+import de.purchasemgr.data.type.Shop;
 import de.purchasemgr.gui.Window;
 import de.purchasemgr.i18n.Messages;
 import de.purchasemgr.i18n.Strings;
@@ -37,18 +44,44 @@ public class PurchaseView {
 
   private final PurchaseController controller;
 
+  private final ShopController shopController;
+
+  private final JList purchaseList = new JList();
+
+  private JScrollPane scrollingPurchaseList;
+
   /**
    * Constructs the view for the purchases
    * 
    * @author croesch
    * @since Date: 15.01.2011 17:20:01
    * @param cont the controller of this view
+   * @param sContr the {@link ShopController} of the program instance
    */
-  public PurchaseView(PurchaseController cont) {
+  public PurchaseView(PurchaseController cont, ShopController sContr) {
     this.controller = cont;
-    //TODO let the ShopController generate this CB
-    this.shopField = new JComboBox(/* this.model.getShops().toArray() */);
+    this.shopController = sContr;
+    this.shopField = this.shopController.getShopBox();
     this.newPurchase = createNewPurchaseFrame();
+
+    initList();
+  }
+
+  private void initList() {
+    this.purchaseList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+    this.purchaseList.setLayoutOrientation(JList.VERTICAL);
+    this.purchaseList.setVisibleRowCount(-1);
+
+    this.scrollingPurchaseList = new JScrollPane(this.purchaseList);
+    this.scrollingPurchaseList.setPreferredSize(new Dimension(200, 300));
+  }
+
+  void edit(Purchase toEdit) {
+    System.out.println(toEdit);
+  }
+
+  int getSelectedPurchaseIndex() {
+    return this.purchaseList.getSelectedIndex();
   }
 
   @SuppressWarnings("nls")
@@ -98,8 +131,9 @@ public class PurchaseView {
   }
 
   void addPurchase() {
-    //TODO get Shop from CB
-    this.controller.createPurchase(this.dayField.getText(), this.monthField.getText(), this.yearField.getText(), null);
+    final Shop selectedShop = this.shopController.getShopForIndex(this.shopField.getSelectedIndex());
+    this.controller.createPurchase(this.dayField.getText(), this.monthField.getText(), this.yearField.getText(),
+                                   selectedShop);
   }
 
   private class PurchaseAction extends AbstractAction {

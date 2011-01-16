@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.purchasemgr.data.type.Purchase;
+import de.purchasemgr.i18n.Messages;
+import de.purchasemgr.logging.LogManager;
 
 /**
  * Contains the data of the purchases of the program
@@ -29,5 +31,21 @@ class PurchaseModel {
    */
   List<Purchase> getPurchases() {
     return this.purchases;
+  }
+
+  void remove(int i) {
+    if (i >= 0) {
+      this.purchases.remove(i);
+    } else {
+      LogManager.log(Messages.LOG_NOPURCHASETOEDIT.text(), true);
+    }
+  }
+
+  Purchase get(int i) {
+    if (i >= 0) {
+      return this.purchases.get(i);
+    }
+    LogManager.log(Messages.LOG_NOPURCHASETOEDIT.text(), true);
+    return null;
   }
 }
