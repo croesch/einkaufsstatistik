@@ -49,19 +49,11 @@ public class GUIManager {
   //		private DataModel dataModel = new DataModel(this);
   static JLabel shopIndexLabel = new JLabel();
 
-  private JButton createShopBtn, stopCreatingShopBtn;
-
   public int nr;
 
   int max;
 
   static Window ABOUT_FRAME;
-
-  /** frame to edit the shops */
-  public Window editShop;
-
-  /** frame to add a new shop */
-  public Window newShop;
 
   Window mainWindow;
 
@@ -85,7 +77,6 @@ public class GUIManager {
     JMenuItem newFile, save, open, exit, items, shops, general;
     JMenuItem purchaseShop, purchaseWDay, purchaseMonth, purchaseYear, purchaseItems, expensesShop;
     JMenuItem expensesWDay, expensesMonth, expensesYear, expensesItems, options, about, version;
-    @SuppressWarnings("hiding")
     JMenuItem newShop;
 
     menu = new CMenu(Messages.MB_MENU.text());

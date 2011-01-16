@@ -45,4 +45,8 @@ class ShopModel {
   int getShopCount() {
     return this.shops.size();
   }
+
+  void set(int index, Shop shop) {
+    this.shops.set(index, shop);
+  }
 }

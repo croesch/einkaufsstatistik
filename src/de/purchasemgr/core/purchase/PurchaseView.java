@@ -131,6 +131,7 @@ public class PurchaseView {
     final Shop selectedShop = this.controller.getShopForIndex(this.shopField.getSelectedIndex());
     this.controller.createPurchase(this.dayField.getText(), this.monthField.getText(), this.yearField.getText(),
                                    selectedShop);
+    this.newPurchase.setVisible(false);
   }
 
   private class PurchaseAction extends AbstractAction {
@@ -165,7 +166,6 @@ public class PurchaseView {
         PurchaseView.this.getNewPurchaseFrame().setVisible(false);
       } else if (this.id == NEW_SAVE) {
         PurchaseView.this.addPurchase();
-        PurchaseView.this.getNewPurchaseFrame().setVisible(false);
       } else {
         LogManager.log(Messages.LOG_ACTION_ERROR.text(e.getActionCommand()));
       }

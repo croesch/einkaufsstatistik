@@ -18,6 +18,8 @@ public class ShopController {
 
   private final ShopView view = new ShopView(this);
 
+  private int editIndex = 0;
+
   /**
    * Returns a combobox that contains all available shops
    * 
@@ -47,13 +49,29 @@ public class ShopController {
     return this.model.getShopCount();
   }
 
+  void createPurchase(String name, String postCode, String location) {
+    this.model.addShop(new Shop(name, postCode, location));
+  }
+
+  void save(String name, String postCode, String location) {
+    this.model.set(this.editIndex, new Shop(name, postCode, location));
+  }
+
   public void editShops() {
-    int nr = getShopCount();
-    if (nr > 0) {
-      this.view.editShop(--nr, this.model.get(nr));
+    if (this.editIndex >= 0) {
+      this.view.editShop(this.editIndex + 1, this.model.get(this.editIndex));
     } else {
       LogManager.log(Messages.LOG_NOSHOPSTOEDIT.text());
     }
   }
 
+  void decrementEditingShop() {
+    --this.editIndex;
+    editShops();
+  }
+
+  void incrementEditingShop() {
+    ++this.editIndex;
+    editShops();
+  }
 }

@@ -44,8 +44,6 @@ public class MainAction extends AbstractAction {
       gui.editShopsRefresh(--gui.nr);
     } else if (this.id == ActionPool.EDIT_SHOPS_NXT.ordinal()) {
       gui.getModel().editShops(gui.nr);
-    } else if (this.id == ActionPool.EDIT_SHOPS_CAN.ordinal()) {
-      gui.editShop.setVisible(false);
     } else if (this.id == ActionPool.ABOUT.ordinal()) {
       GUIManager.about();
     } else if (this.id == ActionPool.NEW_PURCHASE.ordinal()) {
@@ -54,10 +52,6 @@ public class MainAction extends AbstractAction {
       } else {
         controller.newPurchase();
       }
-    } else if (this.id == ActionPool.NEW_SHOP_CANCEL.ordinal()) {
-      gui.newShop.setVisible(false);
-    } else if (this.id == ActionPool.NEW_SHOP_OK.ordinal()) {
-      gui.getModel().addShop();
     } else if (this.id == ActionPool.EDIT_SHOPS.ordinal()) {
       gui.editShops(0);
     } else if (this.id == ActionPool.NEW_SHOP.ordinal()) {
