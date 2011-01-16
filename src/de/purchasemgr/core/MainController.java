@@ -12,9 +12,32 @@ import de.purchasemgr.data.type.Shop;
  */
 public class MainController {
 
+  private MainView view;
+
   private final ShopController sController = new ShopController();
 
   private final PurchaseController pController = new PurchaseController(this.sController);
+
+  /**
+   * Starts the program and displays the main window
+   * 
+   * @author croesch
+   * @since Date: 16.01.2011 16:42:26
+   */
+  public void start() {
+    this.view = new MainView(this);
+    this.view.displayMainWindow();
+  }
+
+  /**
+   * Displays the about frame
+   * 
+   * @author croesch
+   * @since Date: 16.01.2011 16:42:48
+   */
+  public void about() {
+    this.view.displayAboutWindow();
+  }
 
   /**
    * Creates a new purchase and delegates the command to the purchase controller

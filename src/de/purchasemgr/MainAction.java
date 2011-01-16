@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 
 import de.purchasemgr.core.MainController;
-import de.purchasemgr.gui.GUIManager;
 import de.purchasemgr.i18n.Messages;
 import de.purchasemgr.logging.LogManager;
 
@@ -37,7 +36,7 @@ public class MainAction extends AbstractAction {
     if (this.id == ActionPool.EXIT.ordinal()) {
       exit();
     } else if (this.id == ActionPool.ABOUT.ordinal()) {
-      GUIManager.about();
+      controller.about();
     } else if (this.id == ActionPool.NEW_PURCHASE.ordinal()) {
       if (controller.getShopCount() == 0) {
         LogManager.log(Messages.LOG_NOSHOPFORPURCHASE.text(), true);

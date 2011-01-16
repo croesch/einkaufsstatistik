@@ -1,71 +1,33 @@
-package de.purchasemgr.gui;
+package de.purchasemgr.core;
 
-import java.awt.GridLayout;
-
-import javax.swing.JButton;
-import javax.swing.JComponent;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 
-import de.crhcomponents.components.CButton;
 import de.crhcomponents.components.CMenu;
 import de.crhcomponents.components.CMenuItem;
 import de.purchasemgr.ActionPool;
-import de.purchasemgr.Main;
 import de.purchasemgr.i18n.KeyStrokes;
 import de.purchasemgr.i18n.Messages;
 
 /**
- * The manager for everything that has to do with GUI TODO change this and remove this central class
+ * Menu bar for the main program
  * 
  * @author croesch
- * @since $Revision: 1.11 $ Date: 2010/12/19 12:56:24
+ * @since Date: 16.01.2011 16:16:09
  */
-public class GUIManager {
+public class MainMenuBar extends JMenuBar {
 
-  private static final int HSPACE = 20;
-
-  private static final int VSPACE = 13;
-
-  private final JComponent contentPanel = new JPanel();
-
-  private final int width = 400, height = 400;
-
-  private JScrollPane listScroller;
-
-  private JButton newPurch, deletePurch, editPurch;
-
-  private final JPanel buttons = new JPanel();
-
-  //		private DataModel dataModel = new DataModel(this);
-  static JLabel shopIndexLabel = new JLabel();
-
-  int max;
-
-  static Window ABOUT_FRAME;
-
-  Window mainWindow;
+  /** generated serial version UID */
+  private static final long serialVersionUID = -580701349212930525L;
 
   /**
-   * show the about frame
+   * Constructs the menu bar for the main program
+   * 
+   * @author croesch
+   * @since Date: 16.01.2011 16:18:13
    */
-  public static void about() {
-    final String descrAbout = Messages.PROGRAM_ABOUT_TEXT.text(Main.VERSION);
-    final String titleAbout = Messages.PROGRAM_ABOUT_TITLE.text(Main.NAME);
-    JLabel lab = new JLabel(descrAbout);
-    if (ABOUT_FRAME == null) {
-      ABOUT_FRAME = new Window(lab, 200, 100, null, titleAbout);
-    }
-    ABOUT_FRAME.setVisible(true);
-  }
-
-  private JMenuBar createMainMenuBar() {
-
+  public MainMenuBar() {
     JMenuBar mb = new JMenuBar();
     JMenu menu, edit, stat, help, statPurchase, statExpenses;
     JMenuItem newFile, save, open, exit, items, shops, general;
@@ -190,37 +152,5 @@ public class GUIManager {
     mb.add(edit);
     mb.add(stat);
     mb.add(help);
-
-    return mb;
-  }
-
-  private void initialize() {
-
-    //Buttons
-    this.newPurch = new CButton(ActionPool.NEW_PURCHASE.getAction());
-    this.editPurch = new CButton(ActionPool.EDIT_PURCHASE.getAction());
-    this.deletePurch = new CButton(ActionPool.DEL_PURCHASE.getAction());
-
-    this.buttons.setLayout(new GridLayout(3, 1, 0, 10));
-
-    this.buttons.add(this.newPurch);
-    this.buttons.add(this.editPurch);
-    this.buttons.add(this.deletePurch);
-
-    this.contentPanel.add(this.listScroller);
-    this.contentPanel.add(this.buttons);
-  }
-
-  public GUIManager() {
-    initialize();
-    this.mainWindow = new Window(this.contentPanel, this.width, this.height, createMainMenuBar(), Main.NAME);
-    this.mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-  }
-
-  public void setVisible(boolean vis) {
-    if (this.mainWindow != null) {
-      this.mainWindow.setVisible(vis);
-    }
   }
 }

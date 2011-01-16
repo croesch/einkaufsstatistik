@@ -1,6 +1,6 @@
 package de.purchasemgr;
 
-import de.purchasemgr.gui.GUIManager;
+import de.purchasemgr.core.MainController;
 import de.purchasemgr.i18n.Messages;
 import de.purchasemgr.i18n.Strings;
 
@@ -30,19 +30,15 @@ public class Main {
   public static final String NAME = Messages.PROGRAM_NAME + VERSION;
 
   /**
-   * TODO Comment here
+   * Starts the main program
    * 
    * @author croesch
    * @since 10.12.2009
    * @param args the array of arguments
    */
   public static void main(String[] args) {
-    GUIManager gui = new GUIManager();
-    gui.setVisible(true);
+    MainController controller = new MainController();
+    controller.start();
   }
 
-}
-
-class PurchaseManager {
-  // TODO may be useful
 }
