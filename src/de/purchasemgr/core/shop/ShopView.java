@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -47,6 +48,8 @@ class ShopView {
   private final JLabel editShopNumber = new JLabel();
 
   private final Window editShopFrame, newShopFrame;
+
+  private final JComboBox shopBox = new JComboBox();
 
   private ShopAction editNext, editPrevious;
 
@@ -167,7 +170,7 @@ class ShopView {
     String name = this.newShopNameField.getText();
     String postCode = this.newShopPostCodeField.getText();
     String location = this.newShopLocationField.getText();
-    this.controller.createPurchase(name, postCode, location);
+    this.controller.createShop(name, postCode, location);
     this.newShopFrame.setVisible(false);
   }
 
@@ -255,7 +258,17 @@ class ShopView {
     }
   }
 
+  void updateBox(List<Shop> data) {
+    this.shopBox.removeAllItems();
+    this.shopBox.setModel(new DefaultComboBoxModel(data.toArray()));
+  }
+
   JComboBox getBox(List<Shop> shops) {
-    return new JComboBox(shops.toArray());
+    updateBox(shops);
+    return this.shopBox;
+  }
+
+  int getSelectedIndex() {
+    return this.shopBox.getSelectedIndex();
   }
 }

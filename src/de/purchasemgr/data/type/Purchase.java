@@ -21,8 +21,16 @@ public class Purchase {
 
   List<Item> items = new ArrayList<Item>();
 
-  public Purchase(Date date, Shop shop) {
-    this.date = date;
+  /**
+   * Constructs a new purchase with the given parameters
+   * 
+   * @author croesch
+   * @since Date: 23.01.2011 15:13:18
+   * @param date the time millis of the date when the purchase happened
+   * @param shop the shop in which the purchase happened
+   */
+  public Purchase(long date, Shop shop) {
+    this.date = new Date(date);
     this.shop = shop;
   }
 

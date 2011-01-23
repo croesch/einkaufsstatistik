@@ -52,7 +52,8 @@ public class PurchaseController {
   void createPurchase(String day, String month, String year, Shop shop) {
     Calendar cal = new GregorianCalendar();
     cal.set(Integer.valueOf(year).intValue(), Integer.valueOf(month).intValue() - 1, Integer.valueOf(day).intValue());
-    this.model.addPurchase(new Purchase(cal.getTime(), shop));
+    this.model.addPurchase(new Purchase(cal.getTimeInMillis(), shop));
+    this.view.updatePurchaseList(this.model.getPurchases());
   }
 
   /**
@@ -82,6 +83,7 @@ public class PurchaseController {
   public void removeSelectedPurchase() {
     try {
       this.model.remove(this.view.getSelectedPurchaseIndex());
+      this.view.updatePurchaseList(this.model.getPurchases());
     } catch (IndexOutOfBoundsException e) {
       LogManager.log(Messages.LOG_NOPURCHASETOEDIT.text(), true);
     }
@@ -103,10 +105,6 @@ public class PurchaseController {
     return this.sController.getShopBox();
   }
 
-  Shop getShopForIndex(int i) {
-    return this.sController.getShopForIndex(i);
-  }
-
   /**
    * Returns the list of purchases to display
    * 
@@ -116,5 +114,9 @@ public class PurchaseController {
    */
   public Component getPurchaseList() {
     return this.view.getPurchaseList(getList());
+  }
+
+  Shop getSelectedShop() {
+    return this.sController.getSelectedShop();
   }
 }

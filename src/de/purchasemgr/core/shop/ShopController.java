@@ -32,18 +32,6 @@ public class ShopController {
   }
 
   /**
-   * Returns a Shop for the selected index of the list
-   * 
-   * @author croesch
-   * @since Date: 16.01.2011 13:04:35
-   * @param i the index of the shop
-   * @return the shop on that index
-   */
-  public Shop getShopForIndex(int i) {
-    return this.model.get(i);
-  }
-
-  /**
    * Returns the number of available shops
    * 
    * @author croesch
@@ -54,12 +42,17 @@ public class ShopController {
     return this.model.getShopCount();
   }
 
-  void createPurchase(String name, String postCode, String location) {
+  void createShop(String name, String postCode, String location) {
     this.model.addShop(new Shop(name, postCode, location));
+    this.view.updateBox(this.model.getShops());
   }
 
   void save(String name, String postCode, String location) {
-    this.model.set(this.editIndex, new Shop(name, postCode, location));
+    Shop edited = this.model.get(this.editIndex);
+    edited.setName(name);
+    edited.setPostCode(postCode);
+    edited.setLocation(location);
+    this.model.set(this.editIndex, edited);
   }
 
   /**
@@ -94,5 +87,16 @@ public class ShopController {
   void incrementEditingShop() {
     ++this.editIndex;
     editShops();
+  }
+
+  /**
+   * Returns the selected shop of the shop list
+   * 
+   * @author croesch
+   * @since Date: 23.01.2011 14:56:20
+   * @return the selected shop of the shop-box
+   */
+  public Shop getSelectedShop() {
+    return this.model.get(this.view.getSelectedIndex());
   }
 }

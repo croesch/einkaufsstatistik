@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -39,8 +38,6 @@ public class PurchaseView {
 
   private final JTextField yearField = new JTextField();
 
-  private final JComboBox shopField;
-
   private final PurchaseController controller;
 
   private final JList purchaseList = new JList();
@@ -56,7 +53,6 @@ public class PurchaseView {
    */
   public PurchaseView(PurchaseController cont) {
     this.controller = cont;
-    this.shopField = this.controller.getShopBox();
     this.newPurchase = createNewPurchaseFrame();
 
     initList();
@@ -108,7 +104,7 @@ public class PurchaseView {
     pan.add(this.monthField, "cell 3 0, growx, aligny center");
     pan.add(this.yearField, "cell 4 0, growx, aligny center");
     pan.add(shopDesc, "cell 0 1, alignx left, aligny center");
-    pan.add(this.shopField, "cell 2 1 3 1, growx, aligny center");
+    pan.add(this.controller.getShopBox(), "cell 2 1 3 1, growx, aligny center");
     pan.add(buttonsPan, "cell 0 3 6 1,alignx right");
 
     return new Window(pan, 400, 200, null, Messages.PURCHASE_NEW.text());
@@ -120,6 +116,7 @@ public class PurchaseView {
    * @since Date: 15.01.2011 17:21:53
    */
   public void showNewPurchaseFrame() {
+
     this.newPurchase.setVisible(true);
   }
 
@@ -128,7 +125,7 @@ public class PurchaseView {
   }
 
   void addPurchase() {
-    final Shop selectedShop = this.controller.getShopForIndex(this.shopField.getSelectedIndex());
+    final Shop selectedShop = this.controller.getSelectedShop();
     this.controller.createPurchase(this.dayField.getText(), this.monthField.getText(), this.yearField.getText(),
                                    selectedShop);
     this.newPurchase.setVisible(false);
@@ -172,8 +169,12 @@ public class PurchaseView {
     }
   }
 
+  void updatePurchaseList(List<Purchase> data) {
+    this.purchaseList.setListData(data.toArray());
+  }
+
   Component getPurchaseList(List<Purchase> list) {
-    this.purchaseList.setListData(list.toArray());
+    updatePurchaseList(list);
     return this.scrollingPurchaseList;
   }
 }
