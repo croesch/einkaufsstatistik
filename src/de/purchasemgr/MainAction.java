@@ -9,34 +9,56 @@ import de.purchasemgr.i18n.Messages;
 import de.purchasemgr.logging.LogManager;
 
 /**
- * Class to provide the actions used in this program
+ * Class to provide the actions used in this program.
  * 
  * @author croesch
  * @since Date: 2010/12/19 10:41:42
  */
 public class MainAction extends AbstractAction {
 
-  /** generated version UID */
+  /** generated version UID. */
   private static final long serialVersionUID = 1L;
 
+  /** the controller of the main program. */
   private static MainController controller = new MainController();
 
+  /** the id of the action. */
   private final int id;
 
-  MainAction(ActionPool id) {
-    super(id.text());
-    this.id = id.ordinal();
+  /**
+   * Creates the Action for the given information.
+   * 
+   * @author croesch
+   * @since Date: 30.01.2011 16:34:44
+   * @param actionInfo the info of the action.
+   */
+  MainAction(final ActionPool actionInfo) {
+    super(actionInfo.text());
+    this.id = actionInfo.ordinal();
   }
 
+  /**
+   * Starts the program and displays the main window.
+   * 
+   * @author croesch
+   * @since Date: 30.01.2011 16:35:22
+   */
   static void start() {
     controller.start();
   }
 
+  /**
+   * Exits the program.
+   * 
+   * @author croesch
+   * @since Date: 30.01.2011 16:35:38
+   */
   private void exit() {
     System.exit(0);
   }
 
-  public void actionPerformed(ActionEvent e) {
+  @Override
+  public final void actionPerformed(final ActionEvent e) {
     if (this.id == ActionPool.EXIT.ordinal()) {
       exit();
     } else if (this.id == ActionPool.ABOUT.ordinal()) {
