@@ -19,12 +19,19 @@ import de.purchasemgr.i18n.Messages;
  */
 public class MainView {
 
+  /** the controller of this view. */
   private final MainController controller;
 
-  private final Window mainWindow, aboutWindow;
+  /** the main frame of this view */
+  private final Window mainWindow;
 
+  /** the frame to show information about the program */
+  private final Window aboutWindow;
+
+  /** the width of this view */
   private static final int WIDTH = 400;
 
+  /** the height of this view */
   private static final int HEIGHT = 400;
 
   /**
@@ -34,7 +41,7 @@ public class MainView {
    * @since Date: 16.01.2011 16:32:42
    * @param c the controller for the main program
    */
-  public MainView(MainController c) {
+  public MainView(final MainController c) {
     this.controller = c;
 
     this.mainWindow = createMainWindow();
@@ -43,14 +50,33 @@ public class MainView {
     this.aboutWindow = createAboutWindow();
   }
 
-  void displayMainWindow() {
+  /**
+   * Displays the main frame of this view / program
+   * 
+   * @author croesch
+   * @since Date: 06.02.2011 14:49:10
+   */
+  final void displayMainWindow() {
     this.mainWindow.setVisible(true);
   }
 
-  void displayAboutWindow() {
+  /**
+   * Displays the about frame
+   * 
+   * @author croesch
+   * @since Date: 06.02.2011 14:49:46
+   */
+  final void displayAboutWindow() {
     this.aboutWindow.setVisible(true);
   }
 
+  /**
+   * Creates the main frame and its components
+   * 
+   * @author croesch
+   * @since Date: 06.02.2011 14:50:21
+   * @return the created frame
+   */
   @SuppressWarnings("nls")
   private Window createMainWindow() {
 
@@ -71,14 +97,28 @@ public class MainView {
     contentPanel.add(this.controller.getPurchaseList(), "cell 0 0, grow");
     contentPanel.add(buttonsPanel, "cell 1 0,alignx right,aligny center");
 
-    return new Window(contentPanel, WIDTH, HEIGHT, new MainMenuBar(), Main.NAME);
+    Window.Builder b = new Window.Builder(WIDTH, HEIGHT);
+    b = b.menuBar(new MainMenuBar()).title(Main.NAME).component(contentPanel);
+    return b.build();
   }
 
+  /**
+   * Creates the about frame
+   * 
+   * @author croesch
+   * @since Date: 06.02.2011 14:51:34
+   * @return the created frame
+   */
   private Window createAboutWindow() {
     final String descrAbout = Messages.PROGRAM_ABOUT_TEXT.text(Main.VERSION);
     final String titleAbout = Messages.PROGRAM_ABOUT_TITLE.text(Main.NAME);
     JLabel lab = new JLabel(descrAbout);
 
-    return new Window(lab, 200, 100, null, titleAbout);
+    final int width = 200;
+    final int height = 100;
+
+    Window.Builder b = new Window.Builder(width, height);
+    b = b.title(titleAbout).component(lab);
+    return b.build();
   }
 }

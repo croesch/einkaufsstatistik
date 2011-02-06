@@ -62,7 +62,9 @@ class ShopView {
   private Window createNewShopFrame() {
     JPanel pan = new JPanel();
     JPanel buttonPanel = new JPanel();
-    pan.setLayout(new MigLayout(new LC(), new AC().grow(100l, 2).fill(2), new AC().count(6).grow(100l, 5)));
+    pan.setLayout(new MigLayout(new LC(),
+                                new AC().grow(100l, 2).fill(2),
+                                new AC().count(6).grow(100l, 5)));
     buttonPanel.setLayout(new MigLayout());
 
     final JLabel newShopLabel = new JLabel(Messages.SHOP_NEW_INDEX.text());
@@ -73,8 +75,10 @@ class ShopView {
     CButton createShopBtn = new CButton(new ShopAction(ShopAction.NEW_SAVE));
     CButton stopCreatingShopBtn = new CButton(new ShopAction(ShopAction.NEW_CANCEL));
 
-    buttonPanel.add(createShopBtn, new CC().cell(0, 0).sizeGroup(Strings.EMPTY_STRING.text()));
-    buttonPanel.add(stopCreatingShopBtn, new CC().cell(1, 0).sizeGroup(Strings.EMPTY_STRING.text()));
+    buttonPanel.add(createShopBtn, new CC().cell(0, 0)
+      .sizeGroup(Strings.EMPTY_STRING.text()));
+    buttonPanel.add(stopCreatingShopBtn, new CC().cell(1, 0)
+      .sizeGroup(Strings.EMPTY_STRING.text()));
 
     pan.add(newShopLabel, new CC().cell(0, 0));
     pan.add(this.newShopNumber, new CC().cell(2, 0));
@@ -84,9 +88,12 @@ class ShopView {
     pan.add(this.newShopPostCodeField, new CC().cell(2, 3));
     pan.add(newShopLocationLbl, new CC().cell(0, 4));
     pan.add(this.newShopLocationField, new CC().cell(2, 4));
-    pan.add(buttonPanel, new CC().cell(0, 6, 3, 1).alignX(Strings.RIGHT.text()));
+    pan
+      .add(buttonPanel, new CC().cell(0, 6, 3, 1).alignX(Strings.RIGHT.text()));
 
-    return new Window(pan, 400, 300, null, Messages.SHOP_NEW.text());
+    Window.Builder b = new Window.Builder(400, 300);
+    b = b.title(Messages.SHOP_NEW.text()).component(pan);
+    return b.build();
   }
 
   Window getNewShopFrame() {
@@ -101,7 +108,9 @@ class ShopView {
     JPanel pan = new JPanel();
     JPanel navPanel = new JPanel();
     JPanel buttonPanel = new JPanel();
-    pan.setLayout(new MigLayout(new LC(), new AC().grow(100l, 2).fill(2), new AC().count(7).grow(100l, 6)));
+    pan.setLayout(new MigLayout(new LC(),
+                                new AC().grow(100l, 2).fill(2),
+                                new AC().count(7).grow(100l, 6)));
     navPanel.setLayout(new MigLayout());
     buttonPanel.setLayout(new MigLayout());
 
@@ -119,8 +128,10 @@ class ShopView {
     CButton applyShopBtn = new CButton(new ShopAction(ShopAction.EDIT_SAVE));
     CButton cancelShopBtn = new CButton(new ShopAction(ShopAction.EDIT_CANCEL));
 
-    navPanel.add(prevShopBtn, new CC().cell(0, 0).sizeGroup(Strings.EMPTY_STRING.text()));
-    navPanel.add(nextShopBtn, new CC().cell(1, 0).sizeGroup(Strings.EMPTY_STRING.text()));
+    navPanel.add(prevShopBtn, new CC().cell(0, 0)
+      .sizeGroup(Strings.EMPTY_STRING.text()));
+    navPanel.add(nextShopBtn, new CC().cell(1, 0)
+      .sizeGroup(Strings.EMPTY_STRING.text()));
 
     buttonPanel.add(applyShopBtn, new CC().cell(0, 0));
     buttonPanel.add(cancelShopBtn, new CC().cell(1, 0));
@@ -134,14 +145,17 @@ class ShopView {
     pan.add(shopLocationLbl, new CC().cell(0, 4));
     pan.add(this.shopLocation, new CC().cell(2, 4));
     pan.add(navPanel, new CC().cell(0, 5, 3, 1));
-    pan.add(buttonPanel, new CC().cell(0, 7, 3, 1).alignX(Strings.RIGHT.text()));
+    pan
+      .add(buttonPanel, new CC().cell(0, 7, 3, 1).alignX(Strings.RIGHT.text()));
 
-    return new Window(pan, 400, 300, null, Messages.SHOP_EDIT.text());
+    Window.Builder b = new Window.Builder(400, 300);
+    b = b.title(Messages.SHOP_EDIT.text()).component(pan);
+    return b.build();
   }
 
   void editShop(int ind, Shop index) {
-    this.editShopNumber.setText(Messages.SHOP_EDIT_INDEX_VALUE.text(String.valueOf(ind), String.valueOf(this.controller
-      .getShopCount())));
+    this.editShopNumber.setText(Messages.SHOP_EDIT_INDEX_VALUE.text(String
+      .valueOf(ind), String.valueOf(this.controller.getShopCount())));
 
     this.editNext.setEnabled(ind < this.controller.getShopCount());
     this.editPrevious.setEnabled(ind > 1);
@@ -155,8 +169,8 @@ class ShopView {
   }
 
   void newShop() {
-    this.newShopNumber
-      .setText(Messages.SHOP_NEW_INDEX_VALUE.text(String.valueOf((this.controller.getShopCount() + 1))));
+    this.newShopNumber.setText(Messages.SHOP_NEW_INDEX_VALUE.text(String
+      .valueOf((this.controller.getShopCount() + 1))));
 
     this.newShopNameField.setText(Strings.EMPTY_STRING.text());
     this.newShopPostCodeField.setText(Strings.EMPTY_STRING.text());
@@ -233,7 +247,8 @@ class ShopView {
           name = Messages.SHOP_EDIT_SAVE.text();
           break;
         default:
-          throw new IllegalArgumentException(Messages.EXC_ILLARG.text(String.valueOf(id)));
+          throw new IllegalArgumentException(Messages.EXC_ILLARG.text(String
+            .valueOf(id)));
       }
       putValue(Action.NAME, name);
     }

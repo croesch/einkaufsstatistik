@@ -107,7 +107,9 @@ public class PurchaseView {
     pan.add(this.controller.getShopBox(), "cell 2 1 3 1, growx, aligny center");
     pan.add(buttonsPan, "cell 0 3 6 1,alignx right");
 
-    return new Window(pan, 400, 200, null, Messages.PURCHASE_NEW.text());
+    Window.Builder b = new Window.Builder(400, 200);
+    b = b.title(Messages.PURCHASE_NEW.text()).component(pan);
+    return b.build();
   }
 
   /**
@@ -126,8 +128,8 @@ public class PurchaseView {
 
   void addPurchase() {
     final Shop selectedShop = this.controller.getSelectedShop();
-    this.controller.createPurchase(this.dayField.getText(), this.monthField.getText(), this.yearField.getText(),
-                                   selectedShop);
+    this.controller.createPurchase(this.dayField.getText(), this.monthField
+      .getText(), this.yearField.getText(), selectedShop);
     this.newPurchase.setVisible(false);
   }
 
@@ -153,7 +155,8 @@ public class PurchaseView {
           name = Messages.PURCHASE_NEW_SAVE.text();
           break;
         default:
-          throw new IllegalArgumentException(Messages.EXC_ILLARG.text(String.valueOf(id)));
+          throw new IllegalArgumentException(Messages.EXC_ILLARG.text(String
+            .valueOf(id)));
       }
       putValue(Action.NAME, name);
     }
