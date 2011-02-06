@@ -13,6 +13,7 @@ import de.purchasemgr.data.type.Purchase;
  */
 class PurchaseModel {
 
+  /** the list of the purchases */
   private final List<Purchase> purchases = new ArrayList<Purchase>();
 
   /**
@@ -20,7 +21,7 @@ class PurchaseModel {
    * 
    * @param p the purchase to add
    */
-  void addPurchase(Purchase p) {
+  void addPurchase(final Purchase p) {
     this.purchases.add(p);
   }
 
@@ -31,11 +32,30 @@ class PurchaseModel {
     return this.purchases;
   }
 
-  void remove(int i) {
+  /**
+   * Removes the purchase at the given position.
+   * 
+   * @author croesch
+   * @since Date: 06.02.2011 16:33:20
+   * @see List#remove(int)
+   * @param i the index to remove
+   * @throws IndexOutOfBoundsException if the given position is invalid
+   */
+  void remove(final int i) throws IndexOutOfBoundsException {
     this.purchases.remove(i);
   }
 
-  Purchase get(int i) {
+  /**
+   * Returns the purchase at the given position
+   * 
+   * @author croesch
+   * @since Date: 06.02.2011 16:34:50
+   * @see List#get(int)
+   * @param i the index to get
+   * @return the {@link Purchase} at the given position
+   * @throws IndexOutOfBoundsException if the given position is invalid
+   */
+  Purchase get(final int i) throws IndexOutOfBoundsException {
     if (i >= 0) {
       return this.purchases.get(i);
     }

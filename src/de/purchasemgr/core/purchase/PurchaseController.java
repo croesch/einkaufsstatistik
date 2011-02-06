@@ -14,18 +14,25 @@ import de.purchasemgr.i18n.Messages;
 import de.purchasemgr.logging.LogManager;
 
 /**
- * This is the purchase controller, it controls all things that have to do with {@link Purchase}s
+ * This is the purchase controller, it controls all things that have to do with
+ * {@link Purchase}s
  * 
  * @author croesch
  * @since Date: 15.01.2011 15:57:21
  */
 public class PurchaseController {
 
+  /** the model of this controller */
   private final PurchaseModel model = new PurchaseModel();
 
+  /** the view of this controller */
   private final PurchaseView view;
 
+  /** the controller for shops */
   private final ShopController sController;
+
+  /** a calendar to generate dates for the purchase */
+  private final Calendar cal = new GregorianCalendar();
 
   /**
    * Constructs a new PurchaseController
@@ -34,7 +41,7 @@ public class PurchaseController {
    * @since Date: 16.01.2011 12:55:37
    * @param sCont the {@link ShopController} for this instance
    */
-  public PurchaseController(ShopController sCont) {
+  public PurchaseController(final ShopController sCont) {
     this.sController = sCont;
     this.view = new PurchaseView(this);
   }
@@ -49,10 +56,13 @@ public class PurchaseController {
    * @param year the year the purchase was done
    * @param shop the shop in that the purchase was
    */
-  void createPurchase(String day, String month, String year, Shop shop) {
-    Calendar cal = new GregorianCalendar();
-    cal.set(Integer.valueOf(year).intValue(), Integer.valueOf(month).intValue() - 1, Integer.valueOf(day).intValue());
-    this.model.addPurchase(new Purchase(cal.getTimeInMillis(), shop));
+  final void createPurchase(final String day,
+                            final String month,
+                            final String year,
+                            final Shop shop) {
+    this.cal.set(Integer.valueOf(year).intValue(), Integer.valueOf(month)
+      .intValue() - 1, Integer.valueOf(day).intValue());
+    this.model.addPurchase(new Purchase(this.cal.getTimeInMillis(), shop));
     this.view.updatePurchaseList(this.model.getPurchases());
   }
 
@@ -62,7 +72,7 @@ public class PurchaseController {
    * @author croesch
    * @since Date: 16.01.2011 12:26:01
    */
-  public void newPurchase() {
+  public final void newPurchase() {
     this.view.showNewPurchaseFrame();
   }
 
@@ -73,14 +83,14 @@ public class PurchaseController {
    * @since Date: 15.01.2011 16:22:35
    * @return a list of the purchases
    */
-  List<Purchase> getList() {
+  final List<Purchase> getList() {
     return this.model.getPurchases();
   }
 
   /**
    * deletes the selected purchase, logs if that couldn't be done
    */
-  public void removeSelectedPurchase() {
+  public final void removeSelectedPurchase() {
     try {
       this.model.remove(this.view.getSelectedPurchaseIndex());
       this.view.updatePurchaseList(this.model.getPurchases());
@@ -92,7 +102,7 @@ public class PurchaseController {
   /**
    * opens the editWindow for the selected purchase
    */
-  public void editSelectedPurchase() {
+  public final void editSelectedPurchase() {
     Purchase selected = this.model.get(this.view.getSelectedPurchaseIndex());
     if (selected != null) {
       this.view.edit(selected);
@@ -101,7 +111,14 @@ public class PurchaseController {
     }
   }
 
-  JComboBox getShopBox() {
+  /**
+   * Calls {@link ShopController#getShopBox()}
+   * 
+   * @author croesch
+   * @since Date: 06.02.2011 16:31:20
+   * @return returns {@link ShopController#getShopBox()}
+   */
+  final JComboBox getShopBox() {
     return this.sController.getShopBox();
   }
 
@@ -112,11 +129,18 @@ public class PurchaseController {
    * @since Date: 16.01.2011 19:21:45
    * @return a component that could be added to a frame to display the list
    */
-  public Component getPurchaseList() {
+  public final Component getPurchaseList() {
     return this.view.getPurchaseList(getList());
   }
 
-  Shop getSelectedShop() {
+  /**
+   * Calls {@link ShopController#getSelectedShop()}
+   * 
+   * @author croesch
+   * @since Date: 06.02.2011 16:31:20
+   * @return returns {@link ShopController#getSelectedShop()}
+   */
+  final Shop getSelectedShop() {
     return this.sController.getSelectedShop();
   }
 }
