@@ -1,5 +1,6 @@
 package de.purchasemgr.logging;
 
+import java.io.PrintStream;
 import java.text.DateFormat;
 import java.util.Date;
 import java.util.Locale;
@@ -7,19 +8,38 @@ import java.util.Locale;
 import de.purchasemgr.i18n.Messages;
 
 /**
- * TODO Comment here
+ * This class is used to give the ability to log notes. There are two types of messages:<br>
+ * <li>information</li><li>error</li><br>
+ * both will have another output stream.
  * 
  * @author croesch
  * @since Date: 2010/12/19 00:03:13
  */
-public class LogManager {
+public final class LogManager {
+
+  /**
+   * Hidden constructor, don't call it - utility class.
+   * 
+   * @author croesch
+   * @since Date: 08.02.2011 16:55:02
+   * @throws AssertionError on invocation
+   */
+  private LogManager() throws AssertionError {
+    throw new AssertionError();
+  }
+
+  /** output stream for information messages */
+  private static final PrintStream INFORMATION_STREAM = System.out;
+
+  /** output stream for error messages */
+  private static final PrintStream ERROR_STREAM = System.err;
 
   /**
    * Logs the given message to the info log stream
    * 
    * @param msg the message that should be logged.
    */
-  public static void log(String msg) {
+  public static void log(final String msg) {
     LogManager.log(msg, false);
   }
 
@@ -30,15 +50,15 @@ public class LogManager {
    * @param msg the message that should be logged.
    * @param err whether the message is an error message
    */
-  public static void log(String msg, boolean err) {
+  public static void log(final String msg, final boolean err) {
     DateFormat df = DateFormat.getDateTimeInstance(DateFormat.SHORT, DateFormat.MEDIUM, Locale.GERMAN);
     String date = df.format(new Date());
     if (err) {
       String txt = Messages.LOG_ERROR.text(date, msg);
-      System.err.println(txt);
+      ERROR_STREAM.println(txt);
     } else {
       String txt = Messages.LOG_INFO.text(date, msg);
-      System.out.println(txt);
+      INFORMATION_STREAM.println(txt);
     }
   }
 }

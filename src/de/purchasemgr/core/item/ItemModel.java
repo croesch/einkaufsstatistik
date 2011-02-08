@@ -8,4 +8,6 @@ package de.purchasemgr.core.item;
  */
 class ItemModel {
 
+  //TODO implement
+
 }

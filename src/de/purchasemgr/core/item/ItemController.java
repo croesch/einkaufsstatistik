@@ -10,4 +10,6 @@ import de.purchasemgr.data.type.Item;
  */
 public class ItemController {
 
+  //TODO implement
+
 }

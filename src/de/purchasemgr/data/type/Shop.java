@@ -10,10 +10,13 @@ import de.purchasemgr.i18n.Messages;
  */
 public class Shop {
 
+  /** the name of the shop */
   private String name;
 
+  /** the post code of the shop */
   private String postCode;
 
+  /** the location of the shop */
   private String location;
 
   /**
@@ -21,20 +24,31 @@ public class Shop {
    * 
    * @author croesch
    * @since Date: 23.01.2011 15:04:09
-   * @param name the name of the shop
-   * @param postCode the post-code of the shop
-   * @param location the location of the shop
+   * @param n the name of the shop
+   * @param pc the post-code of the shop
+   * @param loc the location of the shop
    */
-  public Shop(String name, String postCode, String location) {
-    this.name = name;
-    this.postCode = postCode;
-    this.location = location;
+  public Shop(final String n, final String pc, final String loc) {
+    setName(n);
+    setPostCode(pc);
+    setLocation(loc);
+  }
+
+  /**
+   * Returns a new instance of a shop with the values of the given shop.
+   * 
+   * @author croesch
+   * @since Date: 08.02.2011 18:32:22
+   * @param s the {@link Shop} to copy
+   */
+  public Shop(final Shop s) {
+    this(s.getName(), s.getPostCode(), s.getLocation());
   }
 
   /**
    * @return the name of this shop
    */
-  public String getName() {
+  public final String getName() {
     return this.name;
   }
 
@@ -44,15 +58,19 @@ public class Shop {
    * @author croesch
    * @since Date: 23.01.2011 15:03:51
    * @param n the new name
+   * @throws IllegalArgumentException if the value is {@code null} or empty
    */
-  public void setName(String n) {
+  public final void setName(final String n) throws IllegalArgumentException {
+    if (n == null || n.trim().length() == 0) {
+      throw new IllegalArgumentException(n);
+    }
     this.name = n;
   }
 
   /**
    * @return the post code of this shop
    */
-  public String getPostCode() {
+  public final String getPostCode() {
     return this.postCode;
   }
 
@@ -62,15 +80,19 @@ public class Shop {
    * @author croesch
    * @since Date: 23.01.2011 15:03:04
    * @param pc the new post-code
+   * @throws IllegalArgumentException if the value is {@code null} or empty
    */
-  public void setPostCode(String pc) {
+  public final void setPostCode(final String pc) throws IllegalArgumentException {
+    if (pc == null || pc.trim().length() == 0) {
+      throw new IllegalArgumentException(pc);
+    }
     this.postCode = pc;
   }
 
   /**
    * @return the location of this shop
    */
-  public String getLocation() {
+  public final String getLocation() {
     return this.location;
   }
 
@@ -80,13 +102,17 @@ public class Shop {
    * @author croesch
    * @since Date: 23.01.2011 15:03:30
    * @param l the new location
+   * @throws IllegalArgumentException if the value is {@code null} or empty
    */
-  public void setLocation(String l) {
+  public final void setLocation(final String l) throws IllegalArgumentException {
+    if (l == null || l.trim().length() == 0) {
+      throw new IllegalArgumentException(l);
+    }
     this.location = l;
   }
 
   @Override
-  public String toString() {
+  public final String toString() {
     return Messages.SHOP_STRING.text(this.name, this.postCode, this.location);
   }
 

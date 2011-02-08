@@ -27,9 +27,17 @@ public enum Strings {
   /** the string for the word right used for mig layout */
   RIGHT ("right");
 
+  /** the value of this instance */
   private final String string;
 
-  private Strings(String s) {
+  /**
+   * Constructs an instance of this enum.
+   * 
+   * @author croesch
+   * @since Date: 08.02.2011 19:14:27
+   * @param s is the value of this instance
+   */
+  private Strings(final String s) {
     this.string = s;
   }
 
