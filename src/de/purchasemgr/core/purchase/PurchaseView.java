@@ -86,7 +86,8 @@ public class PurchaseView {
    * @param toEdit the purchase to edit
    */
   final void edit(final Purchase toEdit) {
-    System.out.println(toEdit);
+    //TODO implement
+    LogManager.log("edit: " + toEdit); //$NON-NLS-1$
   }
 
   /**
@@ -171,16 +172,16 @@ public class PurchaseView {
   }
 
   /**
-   * Submits the data of creating a new purchase given from the frame to create
-   * a new purchase and the shop field, that returns the selected shop
+   * Submits the data of creating a new purchase given from the frame to create a new purchase and the shop field, that
+   * returns the selected shop
    * 
    * @author croesch
    * @since Date: 06.02.2011 16:50:38
    */
   final void addPurchase() {
     final Shop selectedShop = this.controller.getSelectedShop();
-    this.controller.createPurchase(this.dayField.getText(), this.monthField
-      .getText(), this.yearField.getText(), selectedShop);
+    this.controller.createPurchase(this.dayField.getText(), this.monthField.getText(), this.yearField.getText(),
+                                   selectedShop);
     this.newPurchase.setVisible(false);
   }
 
@@ -197,8 +198,7 @@ public class PurchaseView {
   }
 
   /**
-   * Returns the visualised data. Normally a {@link JList} that represents the
-   * given data.
+   * Returns the visualised data. Normally a {@link JList} that represents the given data.
    * 
    * @author croesch
    * @since Date: 06.02.2011 16:57:50
@@ -231,8 +231,7 @@ public class PurchaseView {
     private final int id;
 
     /**
-     * Constructs a new default action. The behaviour is defined by the given
-     * id.
+     * Constructs a new default action. The behaviour is defined by the given id.
      * 
      * @author croesch
      * @since Date: 06.02.2011 16:52:53
@@ -250,8 +249,7 @@ public class PurchaseView {
           name = Messages.PURCHASE_NEW_SAVE.text();
           break;
         default:
-          throw new IllegalArgumentException(Messages.EXC_ILLARG.text(String
-            .valueOf(this.id)));
+          throw new IllegalArgumentException(Messages.EXC_ILLARG.text(String.valueOf(this.id)));
       }
       putValue(Action.NAME, name);
     }

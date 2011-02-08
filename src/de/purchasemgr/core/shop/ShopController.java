@@ -7,8 +7,7 @@ import de.purchasemgr.i18n.Messages;
 import de.purchasemgr.logging.LogManager;
 
 /**
- * This is the shop controller, it controls all things that have to do with
- * {@link Shop}s
+ * This is the shop controller, it controls all things that have to do with {@link Shop}s
  * 
  * @author croesch
  * @since Date: 16.01.2011 12:47:28
@@ -95,10 +94,22 @@ public class ShopController {
    */
   public final void editShops() {
     if (this.editIndex >= 0) {
-      this.view.editShop(this.editIndex + 1, this.model.get(this.editIndex));
+      this.view.editShop(this.editIndex + 1);
     } else {
       LogManager.log(Messages.LOG_NOSHOPSTOEDIT.text());
     }
+  }
+
+  /**
+   * Returns the {@link Shop} at the given position
+   * 
+   * @author croesch
+   * @since Date: 08.02.2011 17:28:18
+   * @param pos the position of the shop >= 0
+   * @return the shop
+   */
+  final Shop getShopAt(final int pos) {
+    return this.model.get(pos);
   }
 
   /**
