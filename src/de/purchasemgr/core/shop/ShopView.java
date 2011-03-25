@@ -11,11 +11,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.github.croesch.components.CButton;
+
 import net.miginfocom.layout.AC;
 import net.miginfocom.layout.CC;
 import net.miginfocom.layout.LC;
 import net.miginfocom.swing.MigLayout;
-import de.crhcomponents.components.CButton;
 import de.purchasemgr.data.type.Shop;
 import de.purchasemgr.gui.Window;
 import de.purchasemgr.i18n.Messages;

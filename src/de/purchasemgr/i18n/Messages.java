@@ -3,7 +3,8 @@ package de.purchasemgr.i18n;
 import java.util.Locale;
 import java.util.ResourceBundle;
 
-import de.crhcomponents.util.FilePropertiesBundle;
+import com.github.croesch.util.FilePropertiesBundle;
+
 
 /**
  * This class provides access to the messages properties file.

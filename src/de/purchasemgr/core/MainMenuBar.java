@@ -4,8 +4,9 @@ import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-import de.crhcomponents.components.CMenu;
-import de.crhcomponents.components.CMenuItem;
+import com.github.croesch.components.CMenu;
+import com.github.croesch.components.CMenuItem;
+
 import de.purchasemgr.ActionPool;
 import de.purchasemgr.i18n.KeyStrokes;
 import de.purchasemgr.i18n.Messages;

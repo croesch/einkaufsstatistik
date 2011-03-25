@@ -4,8 +4,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.github.croesch.components.CButton;
+
 import net.miginfocom.swing.MigLayout;
-import de.crhcomponents.components.CButton;
 import de.purchasemgr.ActionPool;
 import de.purchasemgr.Main;
 import de.purchasemgr.gui.Window;

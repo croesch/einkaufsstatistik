@@ -14,8 +14,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
+import com.github.croesch.components.CButton;
+
 import net.miginfocom.swing.MigLayout;
-import de.crhcomponents.components.CButton;
 import de.purchasemgr.data.type.Purchase;
 import de.purchasemgr.data.type.Shop;
 import de.purchasemgr.gui.Window;

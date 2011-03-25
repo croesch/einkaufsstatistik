@@ -5,7 +5,8 @@ import java.util.ResourceBundle;
 
 import javax.swing.KeyStroke;
 
-import de.crhcomponents.util.FilePropertiesBundle;
+import com.github.croesch.util.FilePropertiesBundle;
+
 
 /**
  * This class provides access to the keystrokes properties file.
