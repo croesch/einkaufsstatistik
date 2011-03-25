@@ -98,7 +98,7 @@ public class MainView {
     contentPanel.add(buttonsPanel, "cell 1 0,alignx right,aligny center");
 
     Window.Builder b = new Window.Builder(WIDTH, HEIGHT);
-    b = b.menuBar(new MainMenuBar()).title(Main.NAME).component(contentPanel);
+    b = b.menuBar(new MainMenuBar()).title(Main.NAME).component(contentPanel).resizable(true);
     return b.build();
   }
 
