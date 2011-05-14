@@ -4,11 +4,9 @@ import java.awt.Component;
 
 import de.purchasemgr.core.purchase.PurchaseController;
 import de.purchasemgr.core.shop.ShopController;
-import de.purchasemgr.data.type.Shop;
 
 /**
- * This is the controller for the whole program and is the layer that acts with
- * the different controllers.
+ * This is the controller for the whole program and is the layer that acts with the different controllers.
  * 
  * @author croesch
  * @since Date: 16.01.2011 12:27:23
@@ -46,8 +44,7 @@ public class MainController {
   }
 
   /**
-   * Creates a new purchase and delegates the command to the purchase
-   * controller.
+   * Creates a new purchase and delegates the command to the purchase controller.
    * 
    * @author croesch
    * @since Date: 16.01.2011 12:34:08
@@ -81,14 +78,14 @@ public class MainController {
    * 
    * @author croesch
    * @since Date: 16.01.2011 16:05:21
-   * @return the number of available {@link Shop}s
+   * @return the number of available {@link de.purchasemgr.data.type.Shop}s
    */
   public final int getShopCount() {
     return this.sController.getShopCount();
   }
 
   /**
-   * Start creating a new {@link Shop}.
+   * Start creating a new {@link de.purchasemgr.data.type.Shop}.
    * 
    * @author croesch
    * @since Date: 16.01.2011 16:05:55
@@ -98,7 +95,7 @@ public class MainController {
   }
 
   /**
-   * Start editing the available {@link Shop}s.
+   * Start editing the available {@link de.purchasemgr.data.type.Shop}s.
    * 
    * @author croesch
    * @since Date: 16.01.2011 16:06:28

@@ -1,12 +1,8 @@
 package de.purchasemgr.i18n;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
-
 import javax.swing.KeyStroke;
 
 import com.github.croesch.util.FilePropertiesBundle;
-
 
 /**
  * This class provides access to the keystrokes properties file.
@@ -73,15 +69,15 @@ public enum KeyStrokes {
   /**
    * Constructs a new keystroke. The properties file is expected to be in the {@code config}-directory.<br>
    * The name of the properties file is {@code keystroke + CODE + .properties}<br> {@code CODE} is built from the
-   * {@link Locale}, it can be empty or one of these: <li>{@code _LC} where LC is the language code</li> <li>{@code
-   * _LC_CT} where CT is the country code</li> <li>{@code _LC_CT_VR} where VT is the variant code</li><br>
+   * {@link java.util.Locale}, it can be empty or one of these: <li>{@code _LC} where LC is the language code</li> <li>
+   * {@code _LC_CT} where CT is the country code</li> <li>{@code _LC_CT_VR} where VT is the variant code</li><br>
    * <br>
    * The key for the property to lookup is {@code pmanager. + NAME}. {@code NAME} is the {@link Enum#name()} of this
    * enum is, but it is converted to lower case and '_' are replaced by '.'.
    * 
    * @author croesch
    * @since Date: 08.02.2011 18:59:14
-   * @see ResourceBundle#getBundle(String, java.util.Locale, ClassLoader)
+   * @see java.util.ResourceBundle#getBundle(String, java.util.Locale, ClassLoader)
    * @see Enum#name()
    * @see String#toLowerCase()
    */
