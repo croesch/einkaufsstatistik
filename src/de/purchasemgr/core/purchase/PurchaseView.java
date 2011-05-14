@@ -1,7 +1,6 @@
 package de.purchasemgr.core.purchase;
 
 import java.awt.Component;
-import java.awt.ScrollPane;
 import java.awt.event.ActionEvent;
 import java.util.List;
 
@@ -14,9 +13,10 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 
+import net.miginfocom.swing.MigLayout;
+
 import com.github.croesch.components.CButton;
 
-import net.miginfocom.swing.MigLayout;
 import de.purchasemgr.data.type.Purchase;
 import de.purchasemgr.data.type.Shop;
 import de.purchasemgr.gui.Window;
@@ -50,7 +50,7 @@ public class PurchaseView {
   /** the list that visualises the purchases stored in the model */
   private final JList purchaseList = new JList();
 
-  /** the {@link ScrollPane} that wraps the list of purchases */
+  /** the {@link java.awt.ScrollPane} that wraps the list of purchases */
   private JScrollPane scrollingPurchaseList;
 
   /**
