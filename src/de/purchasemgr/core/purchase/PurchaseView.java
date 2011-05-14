@@ -50,7 +50,7 @@ public class PurchaseView {
   /** the list that visualises the purchases stored in the model */
   private final JList purchaseList = new JList();
 
-  /** the {@link java.awt.ScrollPane} that wraps the list of purchases */
+  /** the {@link JScrollPane} that wraps the list of purchases */
   private JScrollPane scrollingPurchaseList;
 
   /**
